@@ -1,0 +1,47 @@
+:root {
+  --gris: #cad2c5ff;
+  --verde0: #abc4b0ff;
+  --verde1: #84a98cff;
+  --verde2: #52796fff;
+  --verde3: #354f52ff;
+  --verde4: #2f3e46ff;
+}
+
+.navbar {
+  background-color: var(--verde2);
+  border-bottom: 1px solid var(--verde3);
+}
+
+body {
+  background-color: var(--gris);
+}
+
+footer {
+  background-color: var(--verde2);
+  border-top: 1px solid var(--verde3);
+}
+
+.login {
+  padding: 0px;
+  margin: 10px;
+}
+
+.accordion-body {
+  background-color: var(--verde0);
+}
+.accordion-button {
+  box-sizing: border-box;
+  background-color: var(--verde1);
+}
+.accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+.accordion-button:focus {
+  border-color: var(--verde2);
+  box-shadow: 0 0 0 0.25rem var(--verde3);
+}
+
+.accordion-button:not(.collapsed) {
+  color: black;
+  background-color: var(--verde1);
+}

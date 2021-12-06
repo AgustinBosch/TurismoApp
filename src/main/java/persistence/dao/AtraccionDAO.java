@@ -1,0 +1,12 @@
+package persistence.dao;
+
+import java.util.Map;
+
+import model.Atraccion;
+import persistence.commons.GenericDAO;
+
+public interface AtraccionDAO extends GenericDAO<Atraccion> {
+
+	public Map<String, Atraccion> armarMapaAtraccion();
+
+}
