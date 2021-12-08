@@ -7,7 +7,7 @@
 <body>
 	<jsp:include page="partials/navbar.jsp"></jsp:include>
 
-	<main class="container-fluid">
+	<main class="container-fluid pb-5">
 		<div class="row">
 			<div class="col">
 				<h1 class="text-center">Bienvenido a la Tierra Media</h1>

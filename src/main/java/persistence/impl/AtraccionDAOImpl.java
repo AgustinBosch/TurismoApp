@@ -23,7 +23,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		Atraccion a = NullAtraccion.build();
 		try {
 			a = new Atraccion(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("costo"), rs.getString("tipo"),
-					rs.getDouble("tiempo_promedio"), rs.getInt("cupo"));
+					rs.getDouble("tiempo_promedio"), rs.getInt("cupo"), rs.getString("descripcion"));
 		} catch (DatosNegativosException dne) {
 			EscritorExceptions.escribirExceptions("SalidaExceptions/" + "Exceptions.txt", dne);
 		}

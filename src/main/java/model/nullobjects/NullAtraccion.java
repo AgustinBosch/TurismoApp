@@ -21,7 +21,7 @@ public class NullAtraccion extends Atraccion {
 	}
 
 	public NullAtraccion() throws DatosNegativosException {
-		super(0, "", 0, "", 0, 0);
+		super(0, "", 0, "", 0, 0, "");
 	}
 
 }

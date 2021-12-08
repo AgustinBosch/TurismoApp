@@ -7,8 +7,8 @@ import model.exceptions.TipoException;
 
 public class PromoAxB extends Promo {
 
-	public PromoAxB(int id, ArrayList<Atraccion> atraccionesPromo, String generoDePromo) throws TipoException 	 {
-		super(id, atraccionesPromo, generoDePromo);
+	public PromoAxB(int id, ArrayList<Atraccion> atraccionesPromo, String generoDePromo, String descripcion) throws TipoException 	 {
+		super(id, atraccionesPromo, generoDePromo, descripcion);
 		this.costo = setCosto();
 	}
 

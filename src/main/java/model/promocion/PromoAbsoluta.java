@@ -10,9 +10,9 @@ public class PromoAbsoluta extends Promo {
 	
 	private double nuevoCosto;
 
-	public PromoAbsoluta(int id, ArrayList<Atraccion> miPromo, String generoDePromo, double nuevoCosto) throws TipoException, DatosNegativosException
+	public PromoAbsoluta(int id, ArrayList<Atraccion> miPromo, String generoDePromo, String descripcion, double nuevoCosto) throws TipoException, DatosNegativosException
 			  {
-		super(id, miPromo, generoDePromo);
+		super(id, miPromo, generoDePromo, descripcion);
 		this.nuevoCosto = nuevoCosto;
 		this.costo = validarNuevoCosto(nuevoCosto);
 	}

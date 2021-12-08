@@ -7,6 +7,11 @@
   --verde4: #2f3e46ff;
 }
 
+body{
+/* 	padding-bottom: 100px; */
+}
+
+
 .navbar {
   background-color: var(--verde2);
   border-bottom: 1px solid var(--verde3);
@@ -24,6 +29,17 @@ footer {
 .login {
   padding: 0px;
   margin: 10px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: var(--verde3);
+    border-color: black;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: var(--verde4);
+    border-color: black;
 }
 
 .accordion-body {
@@ -44,4 +60,48 @@ footer {
 .accordion-button:not(.collapsed) {
   color: black;
   background-color: var(--verde1);
+}
+
+.info-usuario{
+	background-color: var(--gris);
+	border: 1px solid var(--verde3);
+	border-radius: 5px;
+	padding: 0 10px;
+	box-shadow: 0 2px 9px black;
+}
+
+.info-usuario > *{
+  padding: 3px;
+}
+
+.info-usuario > i{
+	font-style: normal;
+  	color: var(--verde3);
+}
+
+.card {
+	width: 15rem;
+	background-color: var(--verde0);
+	border: 1px solid var(--verde3);
+	border-radius: 5px;
+	transition: 0.3s;
+}
+.card:hover{
+	transition: 0.3s;
+	box-shadow: 0 2px 9px black;
+}
+
+#boton-logout{
+	transition: 0.3s;
+	color: var(--verde3);
+}
+
+#boton-logout:hover{
+	transition: 0.3s;
+    color: darkred;
+}
+
+a{
+	color: var(--verde4);
+	padding: 4px;
 }

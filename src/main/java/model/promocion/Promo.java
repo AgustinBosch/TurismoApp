@@ -13,12 +13,14 @@ public abstract class Promo implements Sugerible {
 	private final String generoDePromo;
 	protected double costo;
 	private int id;
+	private String descripcion;
 
-	public Promo(int id, ArrayList<Atraccion> miPromo, String generoDePromo) throws TipoException {
+	public Promo(int id, ArrayList<Atraccion> miPromo, String generoDePromo, String descripcion) throws TipoException {
 		this.miPromo = validarPromo(miPromo, generoDePromo);
 		this.duracionPromedio = this.setDuracion();
 		this.generoDePromo = generoDePromo;
 		this.id = id;
+		this.descripcion = descripcion;
 	}
 	
 
@@ -94,11 +96,7 @@ public abstract class Promo implements Sugerible {
 	
 	@Override
 	public String getNombre() {
-		String nombre = "";
-		for (Atraccion atraccion : miPromo) {
-			nombre += atraccion.getNombre() + ", ";
-		}
-		return "Pack " + this.generoDePromo + ": " + nombre;
+		return "Pack " + this.generoDePromo;
 	}
 
 	@Override
@@ -119,6 +117,11 @@ public abstract class Promo implements Sugerible {
 			resultado = s.tengoSugerible(this.miPromo.get(i++));
 
 		return resultado;
+	}
+
+
+	public String getDescripcion() {
+		return descripcion;
 	}
 
 }

@@ -28,7 +28,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		try {
 			AtraccionDAO ad = DAOFactory.getAtraccionDAO();
 			Map<String, Atraccion> mapa = ad.armarMapaAtraccion();
-			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.tipo_atraccion,promociones.extra , group_concat(atraccion) AS 'atracciones' \n"
+			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion) AS 'atracciones' \n"
 					+ "FROM promociones JOIN atracciones_promociones ON promociones.promo_id = atracciones_promociones.promo_id\n"
 					+ "WHERE promociones.promo_id = ?\n" + "GROUP BY promociones.promo_id";
 			Connection conn = ConnectionProvider.getConnection();
@@ -47,7 +47,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
 		Map<String, Atraccion> mapa = ad.armarMapaAtraccion();
 		try {
-			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.tipo_atraccion,promociones.extra , group_concat(atraccion) AS 'atracciones' \n"
+			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion) AS 'atracciones' \n"
 					+ "FROM promociones JOIN atracciones_promociones ON promociones.promo_id = atracciones_promociones.promo_id\n"
 					+ "GROUP BY promociones.promo_id";
 			Connection conn = ConnectionProvider.getConnection();
@@ -76,18 +76,18 @@ public class PromocionDAOImpl implements PromocionDAO {
 			}
 
 			if (rs.getString("tipo_promo").equals("Absoluta")) {
-				p = new PromoAbsoluta(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"),
+				p = new PromoAbsoluta(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"), rs.getString("descripcion"),
 						rs.getDouble("extra"));
 			} else if (rs.getString("tipo_promo").equals("Porcentual")) {
-				p = new PromoPorcentual(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"),
+				p = new PromoPorcentual(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"), rs.getString("descripcion"),
 						rs.getDouble("extra"));
 			} else if (rs.getString("tipo_promo").equals("AxB")) {
-				p = new PromoAxB(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"));
+				p = new PromoAxB(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"), rs.getString("descripcion"));
 			}
 		} catch (DatosNegativosException dne) {
-			EscritorExceptions.escribirExceptions("SalidaExceptions/" + "Exceptions.txt", dne);
+			EscritorExceptions.escribirExceptions("/Exceptions.txt", dne);
 		} catch (TipoException te) {
-			EscritorExceptions.escribirExceptions("SalidaExceptions/" + "Exceptions.txt", te);
+			EscritorExceptions.escribirExceptions("/Exceptions.txt", te);
 		}
 		return p;
 	}

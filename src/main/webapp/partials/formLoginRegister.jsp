@@ -24,12 +24,12 @@
 							</c:if>
 							<label class="form-label" for="nombrelogin"> Nombre </label> <input
 								type="text" id="nombrelogin" class="form-control"
-								name="nombrelogin" placeholder="Nombre" />
+								name="nombrelogin" placeholder="Nombre" minlength="3" required />
 						</div>
 						<div class="form-outline mb-4">
 							<label class="form-label" for="passwordlogin">Password</label> <input
 								type="password" id="passwordlogin" class="form-control"
-								name="passwordlogin" placeholder="Password" />
+								name="passwordlogin" placeholder="Password" minlength="3" required />
 						</div>
 						<!-- Submit button -->
 						<button type="submit" class="btn btn-primary btn-block mb-4">
@@ -52,22 +52,22 @@
 					<!--  Formulario registro sesion -->
 					<form action="register" method="post">
 						<div class="row">
-							<div class="form-outline mb-4">
+							<div class="form-outline mb-2">
 								<label class="form-label" for="nombreregister"> Nombre </label>
 								<input type="text" id="nombreregister" class="form-control"
-									name="nombreregister" placeholder="Ingrese Nombre" />
+									name="nombreregister" placeholder="Ingrese Nombre" minlength="3" required />
 							</div>
 						</div>
 						<div class="row">
-							<div class="form-outline mb-4">
+							<div class="form-outline mb-2">
 								<label class="form-label" for="passwordregister">Password</label>
 								<input type="password" id="passwordregister"
 									class="form-control" name="passwordregister"
-									placeholder="Ingrese Pass" />
+									placeholder="Ingrese Pass" minlength="3" required />
 							</div>
 						</div>
 						<div class="row">
-							<div class="form-outline col-6 mb-4">
+							<div class="form-outline col-6 mb-2">
 								<label class="form-label" for="tiporegister"> Tipo
 									Preferido </label> <select name="tiporegister" id="tiporegister"
 									class="form-select">
@@ -77,22 +77,22 @@
 								</select>
 							</div>
 
-							<div class="form-outline col mb-4">
+							<div class="form-outline col mb-2">
 								<label class="form-label" for="ororegister"> Oro </label> <input
 									type="number" id="ororegister" class="form-control"
-									name="ororegister" placeholder="Oro" />
+									name="ororegister" placeholder="Oro" min="1" required />
 							</div>
 
-							<div class="form-outline col mb-4">
+							<div class="form-outline col mb-2">
 								<label class="form-label" for="tiemporegister"> Horas </label> <input
 									type="number" id="tiemporegister" class="form-control"
-									name="tiemporegister" placeholder="Horas" />
+									name="tiemporegister" placeholder="Horas" min="1" required />
 							</div>
 						</div>
 
 						<!-- Submit button -->
-						<button type="submit" class="btn btn-primary btn-block mb-4">
-							Sign in</button>
+						<button type="submit" class="btn btn-primary btn-block mb-2">
+							Registrar</button>
 					</form>
 				</div>
 			</div>

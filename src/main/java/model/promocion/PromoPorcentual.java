@@ -10,8 +10,8 @@ public class PromoPorcentual extends Promo {
 
 	private final double porcentajeDescuento;
 
-	public PromoPorcentual(int id, ArrayList<Atraccion> atraccionesPromo, String generoDePromo, double porcentajeDescuento) throws DatosNegativosException, TipoException  {
-		super(id, atraccionesPromo, generoDePromo);
+	public PromoPorcentual(int id, ArrayList<Atraccion> atraccionesPromo, String generoDePromo, String descripcion, double porcentajeDescuento) throws DatosNegativosException, TipoException  {
+		super(id, atraccionesPromo, generoDePromo, descripcion);
 		this.porcentajeDescuento = validarDescuento(porcentajeDescuento);
 		this.costo = setCosto();
 	}

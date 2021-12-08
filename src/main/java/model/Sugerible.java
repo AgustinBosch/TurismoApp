@@ -11,6 +11,8 @@ public interface Sugerible {
 	public double getDuracion();
 
 	public int getId();
+	
+	public String getDescripcion();
 
 	public boolean esPromo();
 

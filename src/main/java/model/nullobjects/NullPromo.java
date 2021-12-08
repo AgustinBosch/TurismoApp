@@ -1,5 +1,9 @@
 package model.nullobjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Atraccion;
 import model.exceptions.EscritorExceptions;
 import model.exceptions.TipoException;
 import model.promocion.Promo;
@@ -9,7 +13,8 @@ public class NullPromo extends Promo {
 	public static Promo build() {
 		Promo p = null;
 		try {
-			p = new NullPromo();
+			ArrayList<Atraccion> a = new ArrayList<Atraccion>();
+			p = new NullPromo(a);
 		} catch (TipoException te) {
 			EscritorExceptions.escribirExceptions("SalidaExceptions/" + "Exceptions.txt", te);
 		}
@@ -20,8 +25,8 @@ public class NullPromo extends Promo {
 		return true;
 	}
 
-	public NullPromo() throws TipoException {
-		super(0, null, "");
+	public NullPromo(ArrayList<Atraccion> a) throws TipoException {
+		super(0, a, "", "");
 	}
 
 	@Override

@@ -14,15 +14,17 @@ public class Atraccion implements Sugerible {
 	private final double tiempoPromedio;
 	private int cupo;
 	private int id;
+	private String descripcion;
 
-	public Atraccion(int id, String nombre, double costo, String genero, double tiempoPromedio, int cupo)
-			throws DatosNegativosException {
+	public Atraccion(int id, String nombre, double costo, String genero, double tiempoPromedio, int cupo,
+			String descripcion) throws DatosNegativosException {
 		this.nombre = nombre;
 		this.genero = genero;
 		this.costo = validarCosto(costo);
 		this.cupo = validarCupo(cupo);
 		this.tiempoPromedio = validarTiempoPromedio(tiempoPromedio);
 		this.id = id;
+		this.descripcion = descripcion;
 	}
 
 	/*
@@ -137,6 +139,10 @@ public class Atraccion implements Sugerible {
 
 	public int getCupo() {
 		return this.cupo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
 	}
 
 }
