@@ -80,7 +80,7 @@ footer {
 }
 
 .card {
-	width: 15rem;
+	width: 18rem;
 	background-color: var(--verde0);
 	border: 1px solid var(--verde3);
 	border-radius: 5px;

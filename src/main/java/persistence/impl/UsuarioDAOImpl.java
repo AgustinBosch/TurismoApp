@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import model.Atraccion;
 import model.Itinerario;
 import model.Sugerible;
 import model.Usuario;
@@ -26,8 +24,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@Override
 	public Usuario findbyID(Integer id) {
-		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
-		Map<String, Atraccion> mapa = ad.armarMapaAtraccion();
 		try {
 			String sql = "SELECT * FROM usuarios WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -37,8 +33,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			ResultSet rs = st.executeQuery();
 
 			Usuario u = NullUsuario.build();
-			if (!rs.isClosed()){
-				u = toUsuario(rs, mapa);
+			if (!rs.isClosed()) {
+				u = toUsuario(rs);
 			}
 			return u;
 
@@ -49,8 +45,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@Override
 	public List<Usuario> findAll() {
-		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
-		Map<String, Atraccion> mapa = ad.armarMapaAtraccion();
 		try {
 			String sql = "SELECT * FROM usuarios";
 			Connection conn = ConnectionProvider.getConnection();
@@ -60,7 +54,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
 			while (rs.next()) {
-				usuarios.add(toUsuario(rs, mapa));
+				usuarios.add(toUsuario(rs));
 			}
 			return usuarios;
 
@@ -138,24 +132,27 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
-	private Usuario toUsuario(ResultSet rs, Map<String, Atraccion> mapa) throws SQLException {
+	private Usuario toUsuario(ResultSet rs) throws SQLException {
 		Usuario u = NullUsuario.build();
 		try {
-			String sql = "SELECT tipo, atraccion, promo_id FROM itinerarios WHERE usuario = ?";
+			String sql = "SELECT tipo, atraccion_id, promo_id FROM itinerarios WHERE usuario_id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, rs.getString("nombre"));
+			st.setString(1, rs.getString("id"));
 
 			ResultSet tablaVisitas = st.executeQuery();
 			ArrayList<Sugerible> visitas = new ArrayList<Sugerible>();
+
+			AtraccionDAO ad = DAOFactory.getAtraccionDAO();
 			PromocionDAO pd = DAOFactory.getPromocionDAO();
 
 			while (tablaVisitas.next()) {
 				if (tablaVisitas.getString("tipo").equals("atraccion"))
-					visitas.add(mapa.get(tablaVisitas.getString("atraccion")));
+					visitas.add(ad.findbyID(tablaVisitas.getInt("atraccion_id")));
 				else
 					visitas.add(pd.findbyID(tablaVisitas.getInt("promo_id")));
 			}
+
 			u = new Usuario(rs.getInt("id"), rs.getString("nombre"), rs.getString("hash"),
 					rs.getString("tipo_preferido"), rs.getDouble("oro"), rs.getDouble("tiempo_disponible"),
 					new Itinerario(visitas), rs.getBoolean("admin"));
@@ -167,8 +164,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@Override
 	public Usuario findByName(String nombre) {
-		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
-		Map<String, Atraccion> mapa = ad.armarMapaAtraccion();
 		try {
 			String sql = "SELECT * FROM usuarios WHERE nombre = ?";
 			Connection conn = ConnectionProvider.getConnection();
@@ -177,11 +172,53 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			st.setString(1, nombre);
 			ResultSet rs = st.executeQuery();
 			Usuario u = NullUsuario.build();
-			if (!rs.isClosed()){
-				u = toUsuario(rs, mapa);
+			if (!rs.isClosed()) {
+				u = toUsuario(rs);
 			}
 			return u;
 
+		} catch (SQLException e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public int aniadirVisita(Integer id, Sugerible s) {
+		try {
+			String sql;
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement st;
+			if (s.esPromo()) {
+				sql = "INSERT INTO itinerarios (usuario_id, tipo, promo_id) VALUES (?, ?, ?)";
+				st = conn.prepareStatement(sql);
+				st.setInt(1, id);
+				st.setString(2, "promo");
+				st.setInt(3, s.getId());
+			} else {
+				sql = "INSERT INTO itinerarios (usuario_id, tipo, atraccion_id) VALUES (?, ?, ?)";
+				st = conn.prepareStatement(sql);
+				st.setInt(1, id);
+				st.setString(2, "atraccion");
+				st.setInt(3, s.getId());
+			}
+
+			int resultado = st.executeUpdate();
+			return resultado;
+
+		} catch (SQLException e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public boolean existeUsuario(String name) {
+		try {
+			String sql = "SELECT count(*) as cantidad FROM usuarios WHERE nombre=?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, name);
+			ResultSet rs = st.executeQuery();
+			return rs.getBoolean("cantidad");
 		} catch (SQLException e) {
 			throw new MissingDataException(e);
 		}

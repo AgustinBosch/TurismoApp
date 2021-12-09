@@ -1,6 +1,5 @@
 package services;
 
-
 import model.Itinerario;
 import model.Usuario;
 import model.exceptions.DatosNegativosException;
@@ -22,8 +21,14 @@ public class RegisterService {
 		} catch (DatosNegativosException e) {
 			e.printStackTrace();
 		}
+
 		ud.insert(u);
+
 		return u;
+	}
+
+	public boolean existeNombre(String nombre) {
+		return DAOFactory.getUsuarioDAO().existeUsuario(nombre);
 	}
 
 }

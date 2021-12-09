@@ -29,9 +29,8 @@ public class ListaAtracciones extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println(req.getAttribute("user"));
-		//String gusto = ((Usuario) req.getAttribute("user")).getTipoPref();
-		List<Sugerible> sugeribles = ss.list("AVENTURA");
+		String gusto = ((Usuario)req.getSession().getAttribute("user")).getTipoPref();
+		List<Sugerible> sugeribles = ss.list(gusto);
 		req.setAttribute("sugeribles", sugeribles);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/atracciones.jsp");

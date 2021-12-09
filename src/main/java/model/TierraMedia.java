@@ -60,10 +60,10 @@ public class TierraMedia {
 				while (salida) {
 					String respuesta = miscan.nextLine();
 					if (respuesta.equalsIgnoreCase("y")) {
-						boolean compraExitosa = usuario.comprarSugerible(sugerencia);
-						if (compraExitosa)
-							sugerencia.ocuparLugar();
-						salida = false;
+//						boolean compraExitosa = usuario.comprarSugerible(sugerencia);
+//						if (compraExitosa)
+//							sugerencia.ocuparLugar();
+//						salida = false;
 					} else if (respuesta.equalsIgnoreCase("n"))
 						salida = false;
 					else

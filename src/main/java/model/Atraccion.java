@@ -61,10 +61,8 @@ public class Atraccion implements Sugerible {
 	}
 
 	public void ocuparLugar() {
-		/*
-		 * this.cupo--; AtraccionDAO ad = DAOFactory.getAtraccionDAO();
-		 * ad.updateCupo(this);
-		 */
+		  this.cupo--; 
+		  DAOFactory.getAtraccionDAO().update(this);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import model.exceptions.DatosNegativosException;
@@ -100,20 +101,28 @@ public class Usuario {
 	public boolean isNull() {
 		return false;
 	}
-	public boolean comprarSugerible(Sugerible s) {
-		/*
-		 * UsuarioDAO ud = DAOFactory.getUsuarioDAO();
-		 * 
-		 * boolean resultado = ud.transaccionComprarVisita(this, s); if (resultado) {
-		 * this.oro -= s.cuantoCuesta(); this.tiempoDisponible -= s.duracionPromedio();
-		 * this.itinerario.aniadirVisita(s); } return resultado;
-		 */
-		return false;
+	public void comprarSugerible(Sugerible s) {
+		  UsuarioDAO ud = DAOFactory.getUsuarioDAO();
+		  this.oro -= s.getCosto(); 
+		  this.tiempoDisponible -= s.getDuracion();
+		  ud.update(this);
+		  ud.aniadirVisita(this.id, s);
 	}
 
 	public Itinerario getItinerario() {
 		return itinerario;
 	}
+	
+	public boolean yaCompreSugerible(Sugerible s) {
+		int i = 0;
+		boolean resultado = false;
+		while (!resultado && i < this.itinerario.getVisitas().size()) {
+			if (this.itinerario.getVisitas().get(i++).tengoSugerible(s))
+				resultado = true;
+		}
+		return resultado;
+	}
+	
 
 	@Override
 	public int hashCode() {

@@ -11,7 +11,25 @@
 		<div class="row">
 			<div class="col">
 				<h1 class="text-center">Bienvenido a la Tierra Media</h1>
-				<p class="text-center">texto generico sacado de por ahi</p>
+				<!-- Saluda al usuario(modificar) -->
+				<c:if test="${user !=null}">
+					<h2 class="text-center">
+						Hola
+						<c:out value="${user.getName()}"></c:out>
+					</h2>
+				</c:if>
+				
+				<h3 class="text-center">Disfruta de las mejores atracciones.</h3>
+				<h3 class="text-center">
+					<c:if test="${user == null}">
+				Inicia Sesion para comprar y disfrutar de las mejores atracciones.
+					</c:if>
+				</h3>
+				<h3 class="text-center">
+					<c:if test="${user != null}">
+				Hace Click en "Atracciones" en la parte superior izquierda para comprar tus atracciones favoritas.
+			</c:if>
+				</h3>
 			</div>
 			<c:if test="${user == null}">
 				<jsp:include page="partials/formLoginRegister.jsp"></jsp:include>
