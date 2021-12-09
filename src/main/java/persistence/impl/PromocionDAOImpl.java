@@ -28,9 +28,11 @@ public class PromocionDAOImpl implements PromocionDAO {
 		try {
 			AtraccionDAO ad = DAOFactory.getAtraccionDAO();
 			Map<String, Atraccion> mapa = ad.armarMapaAtraccion();
-			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion) AS 'atracciones' \n"
-					+ "FROM promociones JOIN atracciones_promociones ON promociones.promo_id = atracciones_promociones.promo_id\n"
-					+ "WHERE promociones.promo_id = ?\n" + "GROUP BY promociones.promo_id";
+			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion) AS 'atracciones' "
+					+ "FROM promociones "
+					+ "JOIN atracciones_promociones ON promociones.promo_id = atracciones_promociones.promo_id "
+					+ "WHERE promociones.promo_id = ? "
+					+ "GROUP BY promociones.promo_id";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, id);
@@ -47,8 +49,10 @@ public class PromocionDAOImpl implements PromocionDAO {
 		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
 		Map<String, Atraccion> mapa = ad.armarMapaAtraccion();
 		try {
-			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion) AS 'atracciones' \n"
-					+ "FROM promociones JOIN atracciones_promociones ON promociones.promo_id = atracciones_promociones.promo_id\n"
+			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion) AS 'atracciones' "
+					+ "FROM promociones "
+					+ "JOIN atracciones_promociones ON promociones.promo_id = atracciones_promociones.promo_id "
+					+ "WHERE borrado = 0 "
 					+ "GROUP BY promociones.promo_id";
 			Connection conn = ConnectionProvider.getConnection();
 

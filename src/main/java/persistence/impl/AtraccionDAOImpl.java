@@ -49,7 +49,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	public List<Atraccion> findAll() {
 		try {
 			ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
-			String sql = "SELECT * FROM atracciones";
+			String sql = "SELECT * FROM atracciones WHERE borrado = 0";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement st = conn.prepareStatement(sql);
@@ -67,7 +67,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int countAll() {
 		try {
-			String sql = "SELECT count(*) as cantidad FROM atracciones";
+			String sql = "SELECT count(*) as cantidad FROM atracciones WHERE borrado = 0";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement st = conn.prepareStatement(sql);
@@ -134,13 +134,32 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 
 	@Override
 	public Map<String, Atraccion> armarMapaAtraccion() {
-
-		List<Atraccion> atracciones = findAll();
+		
+		List<Atraccion> atracciones = findAllBorrados();
 		Map<String, Atraccion> resultado = new HashMap<String, Atraccion>();
 		for (Atraccion atraccion : atracciones) {
 			resultado.put(atraccion.getNombre(), atraccion);
 		}
 		return resultado;
+	}
+	
+	
+	public List<Atraccion> findAllBorrados() {
+		try {
+			ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
+			String sql = "SELECT * FROM atracciones";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement st = conn.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				atracciones.add(toAtraccion(rs));
+			}
+			return atracciones;
+		} catch (SQLException e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 }

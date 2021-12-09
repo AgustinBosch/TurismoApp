@@ -25,7 +25,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario findbyID(Integer id) {
 		try {
-			String sql = "SELECT * FROM usuarios WHERE id = ?";
+			String sql = "SELECT * FROM usuarios WHERE id = ? AND borrado = 0";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement st = conn.prepareStatement(sql);
@@ -46,7 +46,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public List<Usuario> findAll() {
 		try {
-			String sql = "SELECT * FROM usuarios";
+			String sql = "SELECT * FROM usuarios WHERE borrado = 0";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement st = conn.prepareStatement(sql);
@@ -66,7 +66,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int countAll() {
 		try {
-			String sql = "SELECT count(*) as cantidad FROM usuarios";
+			String sql = "SELECT count(*) as cantidad FROM usuarios WHERE borrado = 0";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement st = conn.prepareStatement(sql);
@@ -165,7 +165,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario findByName(String nombre) {
 		try {
-			String sql = "SELECT * FROM usuarios WHERE nombre = ?";
+			String sql = "SELECT * FROM usuarios WHERE nombre = ? AND borrado = 0";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement st = conn.prepareStatement(sql);
