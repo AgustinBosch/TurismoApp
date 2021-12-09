@@ -101,7 +101,7 @@ public abstract class Promo implements Sugerible {
 
 	@Override
 	public String toString() {
-		return this.getNombre() + "cuesta: " + this.getCosto() + ", dura: " + this.duracionPromedio + " horas";
+		return this.getNombre() + " cuesta: " + this.getCosto() + ", dura: " + this.duracionPromedio + " horas";
 	}
 
 	/*
