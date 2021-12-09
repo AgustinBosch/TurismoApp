@@ -18,9 +18,9 @@ public class Itinerario {
 	@Override
 	public String toString() {
 		if (this.visitas.isEmpty())
-			return "Usted no compro nada";
-		return "Itinerario " + this.visitas + "\nCosto total: " + this.getCostoTotal() + " de oro, Tiempo total: "
-				+ this.getTiempoTotal() + " horas.";
+			return "Usted no compró nada"; //Se modificó para imprimir en pagina de itinerario 9/12/2021 - 17:15
+		return /*"Itinerario " +*/ this.visitas.toString() ;//+ "\nCosto total: " + this.getCostoTotal() + " de oro, Tiempo total: "
+//				+ this.getTiempoTotal() + " horas.";
 	}
 
 	public ArrayList<Sugerible> getVisitas() {

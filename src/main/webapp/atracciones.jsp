@@ -8,11 +8,9 @@
 	<jsp:include page="partials/navbar.jsp"></jsp:include>
 
 	<main class="container-fluid pb-5 mb-5">
-		<div class="row">
-			<div class="col">
-			<c:out value="${user.getItinerario()}"></c:out>
-			</div>
-		</div>
+<!-- 		<div class="row"> -->
+<!-- 			<a href="itinerario.jsp"><button type="button" class="btn btn-light">Itinerario</button></a> -->
+<!-- 		</div> -->
 		<div class="row">
 			<c:forEach items="${sugeribles}" var="sug">
 				<div class="col-sm-6 col-md-4 col-lg-3">

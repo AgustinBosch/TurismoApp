@@ -28,7 +28,9 @@
 								href="#">Atracciones</a></li>
 						</c:otherwise>
 					</c:choose>
-
+					<c:if test="${user != null}">
+						<li class="nav-item"><a class="nav-link" href="itinerario.jsp">Itinerario</a></li>
+					</c:if>
 				</ul>
 
 				<c:if test="${user != null}">
