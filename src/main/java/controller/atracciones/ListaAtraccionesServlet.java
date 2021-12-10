@@ -16,26 +16,24 @@ import services.AtraccionService;
 import services.SugeribleService;
 
 @WebServlet("/atracciones.do")
-public class ListaAtracciones extends HttpServlet {
+public class ListaAtraccionesServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 7106456794773591642L;
-	private SugeribleService ss;
+	private SugeribleService sugeribleService;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		ss = new SugeribleService();
+		sugeribleService = new SugeribleService();
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String gusto = ((Usuario)req.getSession().getAttribute("user")).getTipoPref();
-		List<Sugerible> sugeribles = ss.list(gusto);
+		List<Sugerible> sugeribles = sugeribleService.buscarSugeribles(gusto);
 		req.setAttribute("sugeribles", sugeribles);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/atracciones.jsp");
 		dispatcher.forward(req, resp);
 	}
-	
-
 }

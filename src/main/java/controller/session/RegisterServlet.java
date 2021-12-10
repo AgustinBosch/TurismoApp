@@ -15,12 +15,12 @@ import services.*;
 public class RegisterServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 2244947150162678906L;
-	RegisterService registerService;
+	UsuarioService usuarioService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		registerService = new RegisterService();
+		usuarioService = new UsuarioService();
 	}
 
 	@Override
@@ -28,18 +28,19 @@ public class RegisterServlet extends HttpServlet {
 		String nombre = req.getParameter("nombreregister");
 		String pass = req.getParameter("passwordregister");
 		String tipo = req.getParameter("tiporegister");
-		Double oro = Double.parseDouble(req.getParameter("ororegister"));
-		Double tiempo = Double.parseDouble(req.getParameter("tiemporegister"));
+		String oro = req.getParameter("ororegister");
+		String tiempo = req.getParameter("tiemporegister");
+		String admin = req.getParameter("adminregister");
 
-		if (registerService.existeNombre(nombre)) {
+		if (usuarioService.existeNombre(nombre)) {
 			req.setAttribute("flashreg", "Nombre no disponible");
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
 			dispatcher.forward(req, resp);
 			
 		} else {
-			
-			Usuario user = registerService.registrarUsuario(nombre, pass, tipo, oro, tiempo);
-			if (!user.isNull()) {
+			Usuario userregistro = usuarioService.registrarUsuario(nombre, pass, tipo, oro, tiempo, admin);
+			if (!userregistro.isNull()) {
+				Usuario user = usuarioService.login(nombre, pass);
 				req.getSession().setAttribute("user", user);
 				resp.sendRedirect("index.jsp");
 			} else {

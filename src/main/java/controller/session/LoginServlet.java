@@ -9,18 +9,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Usuario;
-import services.LoginService;
+import services.UsuarioService;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -2124912783074842275L;
-	LoginService loginService;
+	UsuarioService usuarioService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		loginService = new LoginService();
+		usuarioService = new UsuarioService();
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 		String nombre = req.getParameter("nombrelogin");
 		String pass = req.getParameter("passwordlogin");
 
-		Usuario usuario = loginService.login(nombre, pass);
+		Usuario usuario = usuarioService.login(nombre, pass);
 
 		if (!usuario.isNull()) {
 			req.getSession().setAttribute("user", usuario);

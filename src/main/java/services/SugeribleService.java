@@ -14,7 +14,7 @@ import persistence.dao.PromocionDAO;
 
 public class SugeribleService {
 	
-	public List<Sugerible> list(String gusto) {
+	public List<Sugerible> buscarSugeribles(String gusto) {
 		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
 		PromocionDAO pd = DAOFactory.getPromocionDAO();
 		List<Atraccion> atracciones = ad.findAll();

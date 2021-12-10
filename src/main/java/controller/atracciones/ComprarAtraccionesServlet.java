@@ -16,7 +16,7 @@ import persistence.dao.UsuarioDAO;
 import services.ComprarService;
 
 @WebServlet("/comprar.do")
-public class ComprarAtracciones extends HttpServlet {
+public class ComprarAtraccionesServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 502342851488788609L;
 	private ComprarService cs;

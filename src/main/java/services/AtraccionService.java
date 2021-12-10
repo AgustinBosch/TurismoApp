@@ -8,10 +8,8 @@ import persistence.dao.AtraccionDAO;
 
 public class AtraccionService {
 
-	public List<Atraccion> list() {
-		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
-		List<Atraccion> atracciones = ad.findAll();
-		return atracciones;
+	public List<Atraccion> buscarAtracciones() {
+		return DAOFactory.getAtraccionDAO().findAll();
 	}
 
 }

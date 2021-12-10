@@ -61,14 +61,15 @@
 										</p>
 									</div>
 								</c:if>
-								<label class="form-label" for="nombreregister"> Nombre </label> <input type="text" id="nombreregister" class="form-control" name="nombreregister" placeholder="Ingrese Nombre" minlength="3"
-									required />
+								<label class="form-label" for="nombreregister"> Nombre: </label> <input type="text" id="nombreregister" class="form-control" name="nombreregister" placeholder="Ingrese Nombre" minlength="3" required />
 							</div>
 						</div>
 						<div class="row">
-							<div class="form-outline mb-2">
-								<label class="form-label" for="passwordregister">Password</label> <input type="password" id="passwordregister" class="form-control" name="passwordregister" placeholder="Ingrese Pass"
-									minlength="3" required />
+							<div class="form-outline col mb-2">
+								<label class="form-label" for="passwordregister">Password: </label> <input type="password" id="passwordregister" class="form-control" name="passwordregister" placeholder="Ingrese Pass" minlength="3" required />
+							</div>
+							<div class="form-check col-auto m-auto mb-3">
+								<label class="form-check-label" for="flexCheckDefault"> Admin</label> <input class="form-check-input" type="checkbox" value="true" name="adminregister" id="adminregister">
 							</div>
 						</div>
 						<div class="row">

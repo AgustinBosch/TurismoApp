@@ -18,7 +18,7 @@
 						<c:out value="${user.getName()}"></c:out>
 					</h2>
 				</c:if>
-				
+
 				<h3 class="text-center">Disfruta de las mejores atracciones.</h3>
 				<h3 class="text-center">
 					<c:if test="${user == null}">
@@ -35,6 +35,7 @@
 				<jsp:include page="partials/formLoginRegister.jsp"></jsp:include>
 			</c:if>
 		</div>
+		
 	</main>
 
 	<jsp:include page="partials/footer.jsp"></jsp:include>
