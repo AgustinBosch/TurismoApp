@@ -7,19 +7,27 @@
 <body>
 	<jsp:include page="partials/navbar.jsp"></jsp:include>
 
-	<main class="container-fluid p-4">
-		<div class="row">
-			<h1 class="text-center">Itinerario</h1>
-			<div class="col">
-				<h2 class="text-center"><c:out value="${user.getItinerario()}"></c:out></h2>	
+	<main class="container-fluid  p-4">
+		<div class="itinerario-font">
+
+			<div class="row">
+				<h1 class="text-center titulo">Itinerario</h1>
+				<div class="col">
+					<h2 class="text-center">
+						<c:out value="${user.getItinerario()}"></c:out>
+					</h2>
+				</div>
+				<h2 class="text-center">
+					COMPRA TOTAL :
+					<c:out value="${user.getItinerario().getCostoTotal()}"></c:out>
+					Monedas /
+					<c:out value="${user.getItinerario().getTiempoTotal()}"></c:out>
+					Tiempo
+				</h2>
 			</div>
-			<h2 class="text-center"> COMPRA TOTAL : <c:out value="${user.getItinerario().getCostoTotal()}"></c:out> Monedas / <c:out value="${user.getItinerario().getTiempoTotal()}"></c:out> Tiempo</h2>
-		</div>
-		<div class="row">
-			
+			<div class="row"></div>
 		</div>
 	</main>
-
 	<jsp:include page="partials/footer.jsp"></jsp:include>
 
 </body>

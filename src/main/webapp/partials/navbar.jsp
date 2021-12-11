@@ -24,15 +24,35 @@
 						</c:otherwise>
 					</c:choose>
 				</ul>
-
+		
 				<c:if test="${user != null}">
-					<div class="info-usuario fs-5">
-						<i class="bi bi-piggy-bank-fill"> <c:out value="${user.getOro()}"></c:out></i> <i class="bi bi-clock-fill"> <c:out value="${user.getTiempoDisponible()}"></c:out></i> <i class="bi bi-person-fill">
-							<c:out value="${user.getName()}"></c:out>
+					<div class="info-usuario fs-5 ">
+						<i class="bi bi-piggy-bank-fill"> <c:out value="${user.getOro()}"></c:out></i> <i class="bi bi-clock-fill"> <c:out value="${user.getTiempoDisponible()}"></c:out></i> <i class="bi bi-person-fill" >
+							<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><c:out value="${user.getName()}"></c:out></button>
 						</i> <a href="/TurismoApp/logout"><i id="boton-logout" class="bi bi-arrow-right-square-fill"></i></a>
 					</div>
 				</c:if>
-
+				
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  						<div class="modal-dialog">
+   							 <div class="modal-content">
+      								<div class="modal-header">
+       									 <h4 class="modal-title" id="exampleModalLabel">Usuario: "<c:out value="${user.getName()}"></c:out>"</h4>
+        								
+      								</div>
+      						<div class="modal-body">
+       								<h5>Tipo Preferido: <c:out value="${user.getTipoPref()}"></c:out></h5>
+       								<h5>Oro Disponible: <c:out value="${user.getOro()}"></c:out></h5>
+       								<h5>Tiempo Disponible: <c:out value="${user.getTiempoDisponible()}"></c:out></h5>
+     						 </div>
+     				 <div class="modal-footer">
+        				<button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"><i class="bi bi-backspace-reverse-fill"></i></button>
+        				
+      						</div>
+    					</div>
+  					</div>
+				</div>
+				
 			</div>
 		</div>
 	</nav>

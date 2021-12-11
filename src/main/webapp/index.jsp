@@ -8,6 +8,7 @@
 	<jsp:include page="partials/navbar.jsp"></jsp:include>
 
 	<main class="container-fluid p-4">
+
 		<div class="row">
 			<div class="col">
 				<h1 class="text-center">Bienvenido a la Tierra Media</h1>
@@ -35,7 +36,7 @@
 				<jsp:include page="partials/formLoginRegister.jsp"></jsp:include>
 			</c:if>
 		</div>
-		
+
 	</main>
 
 	<jsp:include page="partials/footer.jsp"></jsp:include>
