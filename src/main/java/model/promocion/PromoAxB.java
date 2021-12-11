@@ -3,11 +3,10 @@ package model.promocion;
 import java.util.ArrayList;
 
 import model.Atraccion;
-import model.exceptions.TipoException;
 
 public class PromoAxB extends Promo {
 
-	public PromoAxB(int id, ArrayList<Atraccion> atraccionesPromo, String generoDePromo, String descripcion) throws TipoException 	 {
+	public PromoAxB(int id, ArrayList<Atraccion> atraccionesPromo, String generoDePromo, String descripcion) {
 		super(id, atraccionesPromo, generoDePromo, descripcion);
 		this.costo = setCosto();
 	}

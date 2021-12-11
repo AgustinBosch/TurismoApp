@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <header>
-	<nav class="navbar navbar-expand-sm navbar-light">
+	<nav class="navbar fixed-top navbar-expand-sm navbar-light">
 		<div class="container-fluid">
 			<i class="navbar-brand bi bi-gem" href="login.html"></i>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -13,14 +13,14 @@
 					<li class="nav-item"><a class="nav-link" href="index.jsp">Inicio</a></li>
 					<c:choose>
 						<c:when test="${user != null}">
-							<li class="nav-item"><a class="nav-link" href="/TurismoApp/atracciones.do">Atracciones</a></li>
+							<li class="nav-item"><a class="nav-link" href="/TurismoApp/productos.do">Productos</a></li>
 							<li class="nav-item"><a class="nav-link" href="itinerario.jsp">Itinerario</a></li>
 							<c:if test="${user.getAdmin()}">
 								<li class="nav-item"><a class="nav-link" href="/TurismoApp/administrar.do">Administrar</a></li>
 							</c:if>
 						</c:when>
 						<c:otherwise>
-							<li class="nav-item"><a class="nav-link disabled" href="#">Atracciones</a></li>
+							<li class="nav-item"><a class="nav-link disabled" href="#">Productos</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>

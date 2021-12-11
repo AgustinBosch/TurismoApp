@@ -1,9 +1,9 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-import model.exceptions.DatosNegativosException;
 import persistence.commons.DAOFactory;
 import persistence.dao.UsuarioDAO;
 import utils.Crypt;
@@ -15,15 +15,15 @@ public class Usuario {
 	private double oro, tiempoDisponible;
 	private Itinerario itinerario;
 	private Boolean admin;
+	private Map<String, String> errors;
 
-	public Usuario(int id, String name, String pass, String TipoPref, double oro, double tiempoDisponible, Itinerario itinerario, Boolean admin)
-			throws DatosNegativosException {
+	public Usuario(int id, String name, String pass, String TipoPref, double oro, double tiempoDisponible, Itinerario itinerario, Boolean admin) {
 		this.id = id;
 		this.name = name;
 		this.pass = pass;
 		this.TipoPref = TipoPref;
-		this.oro = validarOro(oro);
-		this.tiempoDisponible = validarTiempoDisponible(tiempoDisponible);
+		this.oro = oro;
+		this.tiempoDisponible = tiempoDisponible;
 		this.itinerario = itinerario;
 		this.admin = admin;
 	}
@@ -32,28 +32,20 @@ public class Usuario {
 		this.pass = Crypt.hash(pass);
 	}
 
-	/*
-	 * PRE : Recibe un tiempo disponible del usuario POST : Retorna el valor de
-	 * tiempo disponible del usuario en caso de que sea valido caso contrario lanza
-	 * la exception DatosNegativosException
-	 */
-	private double validarTiempoDisponible(double tiempoDisponible) throws DatosNegativosException {
-		if (tiempoDisponible < 0) {
-			throw new DatosNegativosException("El tiempo disponible de: " + this.name + " es negativo");
-		}
-		return tiempoDisponible;
+	public boolean isValido() {
+		validar();
+		return errors.isEmpty();
 	}
 
-	/*
-	 * PRE : Recibe el valor del oro que posee el usuario POST : Retorna el valor
-	 * del oro en caso de que sea valido, caso contrario lanza la exception
-	 * DatosNegativosException
-	 */
-	private double validarOro(double oro) throws DatosNegativosException {
-		if (oro < 0) {
-			throw new DatosNegativosException("El oro de: " + this.name + " es negativo");
-		}
-		return oro;
+	public void validar() {
+		errors = new HashMap<String, String>();
+
+		if (this.oro <= 0) 
+			errors.put("costo", "Debe ser positivo");
+		
+		if (this.tiempoDisponible <= 0) 
+			errors.put("tiempoDisponible", "Debe ser positivo");
+		
 	}
 
 	@Override

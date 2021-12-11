@@ -1,6 +1,6 @@
 
 <!-- Footer -->
-<footer class="fixed-bottom py-2 font-small">
+<footer class="stiky-bottom py-2 font-small">
 	<div class="container-fluid text-center text-md-left">
 		<div class="row">
 			<div class="col-8">

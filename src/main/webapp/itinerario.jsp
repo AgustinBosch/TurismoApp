@@ -7,7 +7,7 @@
 <body>
 	<jsp:include page="partials/navbar.jsp"></jsp:include>
 
-	<main class="container-fluid pb-5 mb-5">
+	<main class="container-fluid p-4">
 		<div class="row">
 			<h1 class="text-center">Itinerario</h1>
 			<div class="col">

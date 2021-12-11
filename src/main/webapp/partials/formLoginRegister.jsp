@@ -30,10 +30,12 @@
 									</p>
 								</div>
 							</c:if>
-							<label class="form-label" for="nombrelogin"> Nombre </label> <input type="text" id="nombrelogin" class="form-control" name="nombrelogin" placeholder="Nombre" minlength="3" required />
+							<label class="form-label" for="nombrelogin"> Nombre </label>
+							<input type="text" id="nombrelogin" class="form-control" name="nombrelogin" placeholder="Nombre" minlength="3" required />
 						</div>
 						<div class="form-outline mb-4">
-							<label class="form-label" for="passwordlogin">Password</label> <input type="password" id="passwordlogin" class="form-control" name="passwordlogin" placeholder="Password" minlength="3" required />
+							<label class="form-label" for="passwordlogin">Password</label>
+							<input type="password" id="passwordlogin" class="form-control" name="passwordlogin" placeholder="Password" minlength="3" required />
 						</div>
 						<!-- Submit button -->
 						<button type="submit" class="btn btn-primary btn-block mb-4">Entrar!</button>
@@ -61,20 +63,24 @@
 										</p>
 									</div>
 								</c:if>
-								<label class="form-label" for="nombreregister"> Nombre: </label> <input type="text" id="nombreregister" class="form-control" name="nombreregister" placeholder="Ingrese Nombre" minlength="3" required />
+								<label class="form-label" for="nombreregister"> Nombre: </label>
+								<input type="text" id="nombreregister" class="form-control" name="nombreregister" placeholder="Ingrese Nombre" minlength="3" required />
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-outline col mb-2">
-								<label class="form-label" for="passwordregister">Password: </label> <input type="password" id="passwordregister" class="form-control" name="passwordregister" placeholder="Ingrese Pass" minlength="3" required />
+								<label class="form-label" for="passwordregister">Password: </label>
+								<input type="password" id="passwordregister" class="form-control" name="passwordregister" placeholder="Ingrese Pass" minlength="3" required />
 							</div>
 							<div class="form-check col-auto m-auto mb-3">
-								<label class="form-check-label" for="flexCheckDefault"> Admin</label> <input class="form-check-input" type="checkbox" value="true" name="adminregister" id="adminregister">
+								<label class="form-check-label" for="flexCheckDefault"> Admin</label>
+								<input class="form-check-input" type="checkbox" value="true" name="adminregister" id="adminregister">
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-outline col-6 mb-2">
-								<label class="form-label" for="tiporegister"> Tipo Preferido </label> <select name="tiporegister" id="tiporegister" class="form-select">
+								<label class="form-label" for="tiporegister"> Tipo Preferido </label>
+								<select name="tiporegister" id="tiporegister" class="form-select">
 									<option value="AVENTURA">Aventura</option>
 									<option value="DEGUSTACION">Degustacion</option>
 									<option value="PAISAJE">Paisaje</option>
@@ -82,11 +88,13 @@
 							</div>
 
 							<div class="form-outline col mb-2">
-								<label class="form-label" for="ororegister"> Oro </label> <input type="number" id="ororegister" class="form-control" name="ororegister" placeholder="Oro" min="1" required />
+								<label class="form-label" for="ororegister"> Oro </label>
+								<input type="number" id="ororegister" class="form-control" name="ororegister" placeholder="Oro" min="1" required />
 							</div>
 
 							<div class="form-outline col mb-2">
-								<label class="form-label" for="tiemporegister"> Horas </label> <input type="number" id="tiemporegister" class="form-control" name="tiemporegister" placeholder="Horas" min="1" required />
+								<label class="form-label" for="tiemporegister"> Horas </label>
+								<input type="number" id="tiemporegister" class="form-control" name="tiemporegister" placeholder="Horas" min="1" required />
 							</div>
 						</div>
 

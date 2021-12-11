@@ -9,9 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import model.Atraccion;
-import model.exceptions.DatosNegativosException;
-import model.exceptions.EscritorExceptions;
-import model.exceptions.TipoException;
 import model.nullobjects.NullPromo;
 import model.promocion.*;
 import persistence.commons.ConnectionProvider;
@@ -24,15 +21,13 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
 	public Promo findbyID(Integer id) {
-		
 		try {
 			AtraccionDAO ad = DAOFactory.getAtraccionDAO();
-			Map<String, Atraccion> mapa = ad.armarMapaAtraccion();
-			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion) AS 'atracciones' "
+			Map<Integer, Atraccion> mapa = ad.armarMapaAtraccion();
+			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion_id) AS 'atracciones' "
 					+ "FROM promociones "
 					+ "JOIN atracciones_promociones ON promociones.promo_id = atracciones_promociones.promo_id "
-					+ "WHERE promociones.promo_id = ? "
-					+ "GROUP BY promociones.promo_id";
+					+ "WHERE promociones.promo_id = ? " + "GROUP BY promociones.promo_id";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, id);
@@ -47,13 +42,12 @@ public class PromocionDAOImpl implements PromocionDAO {
 	@Override
 	public List<Promo> findAll() {
 		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
-		Map<String, Atraccion> mapa = ad.armarMapaAtraccion();
+		Map<Integer, Atraccion> mapa = ad.armarMapaAtraccion();
 		try {
-			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion) AS 'atracciones' "
+			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion_id) AS 'atracciones' "
 					+ "FROM promociones "
 					+ "JOIN atracciones_promociones ON promociones.promo_id = atracciones_promociones.promo_id "
-					+ "WHERE borrado = 0 "
-					+ "GROUP BY promociones.promo_id";
+					+ "WHERE borrado = 0 " + "GROUP BY promociones.promo_id";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement st = conn.prepareStatement(sql);
@@ -70,28 +64,28 @@ public class PromocionDAOImpl implements PromocionDAO {
 		}
 	}
 
-	private Promo toPromo(ResultSet rs, Map<String, Atraccion> mapa) throws SQLException {
+	private Promo toPromo(ResultSet rs, Map<Integer, Atraccion> mapa) throws SQLException {
 		Promo p = NullPromo.build();
-		try {
-			ArrayList<Atraccion> atraccionesDePromo = new ArrayList<Atraccion>();
-			String[] listaString = rs.getString("atracciones").split(",");
-			for (String string : listaString) {
-				atraccionesDePromo.add(mapa.get(string));
-			}
 
-			if (rs.getString("tipo_promo").equals("Absoluta")) {
-				p = new PromoAbsoluta(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"), rs.getString("descripcion"),
-						rs.getDouble("extra"));
-			} else if (rs.getString("tipo_promo").equals("Porcentual")) {
-				p = new PromoPorcentual(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"), rs.getString("descripcion"),
-						rs.getDouble("extra"));
-			} else if (rs.getString("tipo_promo").equals("AxB")) {
-				p = new PromoAxB(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"), rs.getString("descripcion"));
-			}
-		} catch (DatosNegativosException dne) {
-			EscritorExceptions.escribirExceptions("/Exceptions.txt", dne);
-		} catch (TipoException te) {
-			EscritorExceptions.escribirExceptions("/Exceptions.txt", te);
+		ArrayList<Atraccion> atraccionesDePromo = new ArrayList<Atraccion>();
+		String[] listaids = rs.getString("atracciones").split(",");
+		for (String id : listaids) {
+			atraccionesDePromo.add(mapa.get(Integer.parseInt(id)));
+		}
+
+		if (rs.getString("tipo_promo").equals("Absoluta")) {
+			p = new PromoAbsoluta(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"),
+					rs.getString("descripcion"), rs.getDouble("extra"));
+		} else if (rs.getString("tipo_promo").equals("Porcentual")) {
+			p = new PromoPorcentual(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"),
+					rs.getString("descripcion"), rs.getDouble("extra"));
+		} else if (rs.getString("tipo_promo").equals("AxB")) {
+			p = new PromoAxB(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"),
+					rs.getString("descripcion"));
+		}
+
+		if (!p.isValido()) {
+			p = NullPromo.build();
 		}
 		return p;
 	}
@@ -123,26 +117,24 @@ public class PromocionDAOImpl implements PromocionDAO {
 			st.setString(2, p.getGenero());
 			st.setDouble(3, p.getExtra());
 			int resultado = st.executeUpdate();
-			
+
 			String sqlatraccion;
 			PreparedStatement stAtraccion;
 			for (Atraccion a : p.getMisAtracciones()) {
-				sqlatraccion = "INSERT INTO atracciones_promociones (promo_id, atraccion) VALUES ( ?, ?)";
+				sqlatraccion = "INSERT INTO atracciones_promociones (promo_id, atraccion_id) VALUES ( ?, ?)";
 				stAtraccion = conn.prepareStatement(sqlatraccion);
 				stAtraccion.setInt(1, ultimoId);
-				stAtraccion.setString(2, a.getNombre());
+				stAtraccion.setInt(2, a.getId());
 				resultado += stAtraccion.executeUpdate();
 			}
-			
+
 			return resultado;
-			
-			
-			
+
 		} catch (SQLException e) {
 			throw new MissingDataException(e);
 		}
 	}
-	
+
 	private int ultimoId() {
 		try {
 			String sql = "SELECT seq FROM sqlite_sequence WHERE name = promociones";
@@ -152,7 +144,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 			ResultSet rs = st.executeQuery();
 			int ultimoId = rs.getInt("seq");
 			return ultimoId;
-			
+
 		} catch (SQLException e) {
 			throw new MissingDataException(e);
 		}

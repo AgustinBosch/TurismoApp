@@ -3,30 +3,24 @@ package model.promocion;
 import java.util.ArrayList;
 
 import model.Atraccion;
-import model.exceptions.DatosNegativosException;
-import model.exceptions.TipoException;
 
 public class PromoPorcentual extends Promo {
 
 	private final double porcentajeDescuento;
 
-	public PromoPorcentual(int id, ArrayList<Atraccion> atraccionesPromo, String generoDePromo, String descripcion, double porcentajeDescuento) throws DatosNegativosException, TipoException  {
+	public PromoPorcentual(int id, ArrayList<Atraccion> atraccionesPromo, String generoDePromo, String descripcion, double porcentajeDescuento) {
 		super(id, atraccionesPromo, generoDePromo, descripcion);
-		this.porcentajeDescuento = validarDescuento(porcentajeDescuento);
+		this.porcentajeDescuento = porcentajeDescuento;
 		this.costo = setCosto();
 	}
-
-	/*
-	 * PRE: Recibe el porcentaje de descuento de la promocion
-	 * POST: Retorna el porcentaje de descuento de la promocion en caso de que sea valido,
-	 * 		caso contrario lanza DatosNegativosException
-	 */
 	
-	private double validarDescuento(double porcentajeDescuento)throws DatosNegativosException {
-		if (porcentajeDescuento < 0) {
-			throw new DatosNegativosException("El porcentaje de descuento de la promo: " + this.getNombre() + " es negativo");
+	@Override
+	public void validar() {
+		super.validar();
+		if(porcentajeDescuento <= 0) {
+			this.errors.put("porcentaje Descuento", "Debe ser positivo");
 		}
-		return porcentajeDescuento;
+		
 	}
 	
 	private double setCosto() {

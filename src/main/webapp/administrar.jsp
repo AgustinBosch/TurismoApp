@@ -6,7 +6,7 @@
 </head>
 <body>
 	<jsp:include page="partials/navbar.jsp"></jsp:include>
-	<main class="container-fluid pb-5">
+	<main class="container-fluid p-4">
 
 		<div class="accordion" id="accordionExample">
 			<div class="accordion-item">
@@ -16,6 +16,7 @@
 				<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 					<div class="accordion-body">
 
+						<a href="/TurismoApp/crearAtraccion.do"><button class="card-link btn btn-primary mb-3">+ Nueva atraccion</button></a>
 						<table class="table table-striped table-hover">
 							<tr>
 								<th>id</th>
@@ -32,16 +33,11 @@
 									<td><c:out value="${atr.getGenero()}"></c:out></td>
 									<td><c:out value="${atr.getCosto()}"></c:out></td>
 									<td><c:out value="${atr.getDuracion()}"></c:out></td>
-									<td>
-									<a href="/TurismoApp/editarAtraccion.do?id=${atr.getId()}"><i class="bi bi-pencil-square"></i></a>
-									<a href="/TurismoApp/borrarAtraccion.do?id=${atr.getId()}"><i class="bi bi-trash-fill"></i></a>
-									</td>
+									<td><a href="/TurismoApp/editarAtraccion.do?id=${atr.getId()}"><i class="bi bi-pencil-square"></i></a> <a href="/TurismoApp/borrarAtraccion.do?id=${atr.getId()}"><i class="bi bi-trash-fill"></i></a></td>
 								</tr>
 							</c:forEach>
-							
-							
 						</table>
-					<a><button class="card-link btn btn-primary">+ Nueva atraccion</button></a>
+
 
 					</div>
 				</div>
@@ -53,6 +49,7 @@
 				<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 					<div class="accordion-body">
 
+						<a href="/TurismoApp/crearPromo.do"><button class="card-link btn btn-primary mb-3">+ Nueva promo</button></a>
 						<table class="table table-striped table-hover">
 							<tr>
 								<th>id</th>
@@ -69,15 +66,11 @@
 									<td><c:out value="${promo.getGenero()}"></c:out></td>
 									<td><c:out value="${promo.getCosto()}"></c:out></td>
 									<td><c:out value="${promo.getDuracion()}"></c:out></td>
-									<td>
-									<a href="/TurismoApp/editarPromo.do?id=${promo.getId()}"><i class="bi bi-pencil-square"></i></a>
-									<a href="/TurismoApp/borrarPromo.do?id=${promo.getId()}"><i class="bi bi-trash-fill"></i></a>
-									</td>
-
+									<td><a href="/TurismoApp/editarPromo.do?id=${promo.getId()}"><i class="bi bi-pencil-square"></i></a> <a href="/TurismoApp/borrarPromo.do?id=${promo.getId()}"><i class="bi bi-trash-fill"></i></a></td>
 								</tr>
 							</c:forEach>
 						</table>
-					<a><button class="card-link btn btn-primary">+ Nueva promo</button></a></tr>
+						
 					</div>
 				</div>
 			</div>
@@ -88,6 +81,7 @@
 				<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 					<div class="accordion-body">
 
+						<a href="/TurismoApp/crearUsuario .do"><button class="card-link btn btn-primary mb-3">+ Nuevo usuario</button></a>
 						<table class="table table-striped table-hover">
 							<tr>
 								<th>id</th>
@@ -107,14 +101,11 @@
 									<td><c:out value="${user.getTiempoDisponible()}"></c:out></td>
 									<td><c:out value="${user.getAdmin()}"></c:out></td>
 
-									<td>
-									<a href="/TurismoApp/editarUsuario.do?id=${user.getId()}"><i class="bi bi-pencil-square"></i></a>
-									<a href="/TurismoApp/borrarUsuario.do?id=${user.getId()}"><i class="bi bi-trash-fill"></i></a>
-									</td>
+									<td><a href="/TurismoApp/editarUsuario.do?id=${user.getId()}"><i class="bi bi-pencil-square"></i></a><a href="/TurismoApp/borrarUsuario.do?id=${user.getId()}"><i class="bi bi-trash-fill"></i></a></td>
 								</tr>
 							</c:forEach>
 						</table>
-					<a><button class="card-link btn btn-primary">+ Nuevo usuario</button></a>
+
 					</div>
 				</div>
 			</div>

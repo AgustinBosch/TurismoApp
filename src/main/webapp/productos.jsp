@@ -7,11 +7,8 @@
 <body>
 	<jsp:include page="partials/navbar.jsp"></jsp:include>
 
-	<main class="container-fluid pb-5 mb-5">
-<!-- 		<div class="row"> -->
-<!-- 			<a href="itinerario.jsp"><button type="button" class="btn btn-light">Itinerario</button></a> -->
-<!-- 		</div> -->
-		<div class="row">
+	<main class="container-fluid p-4">
+		<div class="row" id="atracciones">
 			<c:forEach items="${sugeribles}" var="sug">
 				<div class="col-sm-6 col-md-4 col-lg-3">
 					<div class="card m-4">

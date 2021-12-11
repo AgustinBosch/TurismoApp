@@ -8,7 +8,7 @@ import persistence.commons.GenericDAO;
 
 public interface AtraccionDAO extends GenericDAO<Atraccion> {
 
-	public Map<String, Atraccion> armarMapaAtraccion();
+	public Map<Integer, Atraccion> armarMapaAtraccion();
 	
 	public List<Atraccion> findAllBorrados();
 

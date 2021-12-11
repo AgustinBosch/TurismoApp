@@ -1,10 +1,10 @@
 package model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-import model.exceptions.DatosNegativosException;
 import persistence.commons.DAOFactory;
-import persistence.dao.AtraccionDAO;
 
 public class Atraccion implements Sugerible {
 
@@ -15,54 +15,51 @@ public class Atraccion implements Sugerible {
 	private int cupo;
 	private int id;
 	private String descripcion;
+	private Map<String, String> errors;
 
 	public Atraccion(int id, String nombre, double costo, String genero, double tiempoPromedio, int cupo,
-			String descripcion) throws DatosNegativosException {
+			String descripcion) {
 		this.nombre = nombre;
 		this.genero = genero;
-		this.costo = validarCosto(costo);
-		this.cupo = validarCupo(cupo);
-		this.tiempoPromedio = validarTiempoPromedio(tiempoPromedio);
+		this.costo = costo;
+		this.cupo = cupo;
+		this.tiempoPromedio = tiempoPromedio;
 		this.id = id;
 		this.descripcion = descripcion;
 	}
 
-	/*
-	 * PRE : Recibe un tiempo promedio de atracción POST : Retorna el valor de
-	 * tiempo promedio en caso de que sea valido, caso contrario lanza la exception
-	 * DatosNegativosException
-	 */
-	private Double validarTiempoPromedio(double tiempoPromedio) throws DatosNegativosException {
-		if (tiempoPromedio < 0) {
-			throw new DatosNegativosException("El tiempo promedio de: " + this.nombre + " posee un valor negativo");
-		}
-		return tiempoPromedio;
+	public boolean isNull() {
+		return false;
 	}
 
-	private int validarCupo(int cupo) throws DatosNegativosException {
-		if (cupo < 0) {
-			throw new DatosNegativosException("El cupo de la atraccion: " + this.nombre + " posee un valor negativo");
-		} else {
-			return cupo;
-		}
+	public boolean isValido() {
+		validar();
+		return errors.isEmpty();
 	}
 
-	/*
-	 * PRE: Recibe el valor de un costo POST: Retorna el valor del costo en caso de
-	 * que sea válido, caso contrario lanza la exception DatosNegativosException
-	 */
+	public void validar() {
+		errors = new HashMap<String, String>();
 
-	private Double validarCosto(Double costo) throws DatosNegativosException {
-		if (costo < 0) {
-			throw new DatosNegativosException("El costo de la atraccion: " + this.nombre + " posee un valor negativo");
-		} else {
-			return costo;
-		}
+		if (this.nombre.length() <= 2) 
+			errors.put("nombre", "Debe ser mayor o igual a 3");
+		
+		if (this.costo <= 0) 
+			errors.put("costo", "Debe ser positivo");
+		
+		if (this.tiempoPromedio <= 0) 
+			errors.put("tiempo", "Debe ser positivo");
+		
+		if (this.cupo <= 0) 
+			errors.put("cupo", "Debe ser positivo");
+		
+		if (this.descripcion.length() <= 2) 
+			errors.put("descripcion", "Debe ser mayor o igual a 3");
+		
 	}
 
 	public void ocuparLugar() {
-		  this.cupo--; 
-		  DAOFactory.getAtraccionDAO().update(this);
+		this.cupo--;
+		DAOFactory.getAtraccionDAO().update(this);
 	}
 
 	@Override
@@ -141,6 +138,10 @@ public class Atraccion implements Sugerible {
 
 	public String getDescripcion() {
 		return descripcion;
+	}
+
+	public Map<String, String> getErrors() {
+		return errors;
 	}
 
 }

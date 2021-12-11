@@ -1,4 +1,4 @@
-package controller.atracciones;
+package controller.productos;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,8 +15,8 @@ import model.Usuario;
 import services.AtraccionService;
 import services.SugeribleService;
 
-@WebServlet("/atracciones.do")
-public class ListaAtraccionesServlet extends HttpServlet {
+@WebServlet("/productos.do")
+public class ListaProductosServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 7106456794773591642L;
 	private SugeribleService sugeribleService;
@@ -33,7 +33,7 @@ public class ListaAtraccionesServlet extends HttpServlet {
 		List<Sugerible> sugeribles = sugeribleService.buscarSugeribles(gusto);
 		req.setAttribute("sugeribles", sugeribles);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/atracciones.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/productos.jsp");
 		dispatcher.forward(req, resp);
 	}
 }

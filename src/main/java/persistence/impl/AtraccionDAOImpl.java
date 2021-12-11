@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import model.Atraccion;
-import model.exceptions.DatosNegativosException;
-import model.exceptions.EscritorExceptions;
 import model.nullobjects.NullAtraccion;
 import persistence.commons.ConnectionProvider;
 import persistence.commons.MissingDataException;
@@ -20,15 +18,12 @@ import persistence.dao.AtraccionDAO;
 public class AtraccionDAOImpl implements AtraccionDAO {
 
 	private Atraccion toAtraccion(ResultSet rs) throws SQLException {
-		Atraccion a = NullAtraccion.build();
-		try {
-			a = new Atraccion(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("costo"), rs.getString("tipo"),
-					rs.getDouble("tiempo_promedio"), rs.getInt("cupo"), rs.getString("descripcion"));
-		} catch (DatosNegativosException dne) {
-			EscritorExceptions.escribirExceptions("SalidaExceptions/" + "Exceptions.txt", dne);
+		Atraccion a = new Atraccion(rs.getInt("id"), rs.getString("nombre"), rs.getDouble("costo"), rs.getString("tipo"),
+				rs.getDouble("tiempo_promedio"), rs.getInt("cupo"), rs.getString("descripcion"));
+		if(!a.isValido()) {
+			a = NullAtraccion.build();
 		}
 		return a;
-
 	}
 
 	@Override
@@ -82,7 +77,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int insert(Atraccion a) {
 		try {
-			String sql = "INSERT INTO atracciones (nombre, costo, tipo, tiempo_promedio, cupo) VALUES( ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO atracciones (nombre, costo, tipo, tiempo_promedio, cupo, descripcion) VALUES( ?, ?, ?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, a.getNombre());
@@ -90,6 +85,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			st.setString(3, a.getGenero());
 			st.setDouble(4, a.getDuracion());
 			st.setInt(5, a.getCupo());
+			st.setString(6, a.getDescripcion());
 			int rs = st.executeUpdate();
 			return rs;
 		} catch (SQLException e) {
@@ -100,7 +96,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int update(Atraccion a) {
 		try {
-			String sql = "UPDATE atracciones SET nombre = ?, costo = ?, tipo = ?, tiempo_promedio  = ?, cupo = ? WHERE id = ?";
+			String sql = "UPDATE atracciones SET nombre = ?, costo = ?, tipo = ?, tiempo_promedio  = ?, cupo = ?, descripcion = ? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, a.getNombre());
@@ -108,7 +104,8 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			st.setString(3, a.getGenero());
 			st.setDouble(4, a.getDuracion());
 			st.setInt(5, a.getCupo());
-			st.setInt(6, a.getId());
+			st.setString(6, a.getDescripcion());
+			st.setInt(7, a.getId());
 			int rs = st.executeUpdate();
 			return rs;
 		} catch (SQLException e) {
@@ -133,17 +130,16 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	}
 
 	@Override
-	public Map<String, Atraccion> armarMapaAtraccion() {
-		
+	public Map<Integer, Atraccion> armarMapaAtraccion() {
+
 		List<Atraccion> atracciones = findAllBorrados();
-		Map<String, Atraccion> resultado = new HashMap<String, Atraccion>();
+		Map<Integer, Atraccion> resultado = new HashMap<Integer, Atraccion>();
 		for (Atraccion atraccion : atracciones) {
-			resultado.put(atraccion.getNombre(), atraccion);
+			resultado.put(atraccion.getId(), atraccion);
 		}
 		return resultado;
 	}
-	
-	
+
 	public List<Atraccion> findAllBorrados() {
 		try {
 			ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();

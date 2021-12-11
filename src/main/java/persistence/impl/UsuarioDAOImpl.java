@@ -10,8 +10,6 @@ import java.util.List;
 import model.Itinerario;
 import model.Sugerible;
 import model.Usuario;
-import model.exceptions.DatosNegativosException;
-import model.exceptions.EscritorExceptions;
 import model.nullobjects.NullUsuario;
 import persistence.commons.ConnectionProvider;
 import persistence.commons.DAOFactory;
@@ -27,7 +25,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		try {
 			String sql = "SELECT * FROM usuarios WHERE id = ? AND borrado = 0";
 			Connection conn = ConnectionProvider.getConnection();
-
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
@@ -133,33 +130,35 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	private Usuario toUsuario(ResultSet rs) throws SQLException {
-		Usuario u = NullUsuario.build();
-		try {
-			String sql = "SELECT tipo, atraccion_id, promo_id FROM itinerarios WHERE usuario_id = ?";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, rs.getString("id"));
+		Usuario u;
+		String sql = "SELECT tipo, atraccion_id, promo_id FROM itinerarios WHERE usuario_id = ?";
+		Connection conn = ConnectionProvider.getConnection();
+		PreparedStatement st = conn.prepareStatement(sql);
+		st.setString(1, rs.getString("id"));
 
-			ResultSet tablaVisitas = st.executeQuery();
-			ArrayList<Sugerible> visitas = new ArrayList<Sugerible>();
+		ResultSet tablaVisitas = st.executeQuery();
+		ArrayList<Sugerible> visitas = new ArrayList<Sugerible>();
 
-			AtraccionDAO ad = DAOFactory.getAtraccionDAO();
-			PromocionDAO pd = DAOFactory.getPromocionDAO();
+		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
+		PromocionDAO pd = DAOFactory.getPromocionDAO();
 
-			while (tablaVisitas.next()) {
-				if (tablaVisitas.getString("tipo").equals("atraccion"))
-					visitas.add(ad.findbyID(tablaVisitas.getInt("atraccion_id")));
-				else
-					visitas.add(pd.findbyID(tablaVisitas.getInt("promo_id")));
-			}
-
-			u = new Usuario(rs.getInt("id"), rs.getString("nombre"), rs.getString("hash"),
-					rs.getString("tipo_preferido"), rs.getDouble("oro"), rs.getDouble("tiempo_disponible"),
-					new Itinerario(visitas), rs.getBoolean("admin"));
-		} catch (DatosNegativosException dne) {
-			EscritorExceptions.escribirExceptions("SalidaExceptions/" + "Exceptions.txt", dne);
+		while (tablaVisitas.next()) {
+			if (tablaVisitas.getString("tipo").equals("atraccion"))
+				visitas.add(ad.findbyID(tablaVisitas.getInt("atraccion_id")));
+			else
+				visitas.add(pd.findbyID(tablaVisitas.getInt("promo_id")));
 		}
+
+		u = new Usuario(rs.getInt("id"), rs.getString("nombre"), rs.getString("hash"), rs.getString("tipo_preferido"),
+				rs.getDouble("oro"), rs.getDouble("tiempo_disponible"), new Itinerario(visitas),
+				rs.getBoolean("admin"));
+		
+		if(!u.isValido()) {
+			u = NullUsuario.build();
+		}
+		
 		return u;
+
 	}
 
 	@Override

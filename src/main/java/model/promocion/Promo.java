@@ -1,10 +1,11 @@
 package model.promocion;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import model.Atraccion;
 import model.Sugerible;
-import model.exceptions.TipoException;
 
 public abstract class Promo implements Sugerible {
 
@@ -14,9 +15,11 @@ public abstract class Promo implements Sugerible {
 	protected double costo;
 	private int id;
 	private String descripcion;
+	protected Map<String, String> errors;
 
-	public Promo(int id, ArrayList<Atraccion> miPromo, String generoDePromo, String descripcion) throws TipoException {
-		this.miPromo = validarPromo(miPromo, generoDePromo);
+
+	public Promo(int id, ArrayList<Atraccion> miPromo, String generoDePromo, String descripcion) {
+		this.miPromo = miPromo;
 		this.duracionPromedio = this.setDuracion();
 		this.generoDePromo = generoDePromo;
 		this.id = id;
@@ -24,19 +27,18 @@ public abstract class Promo implements Sugerible {
 	}
 	
 
-	/*
-	 * PRE: Recibe una lista de atracciones que incluye la promo y el String de
-	 * genero de la misma POST: Retorna la lista de atracciones que incluye la promo
-	 * en caso de que el genero de las atracciones coincidan con el genero de la
-	 * promocion, caso contrario se lanza StringException
-	 */
-	private ArrayList<Atraccion> validarPromo(ArrayList<Atraccion> miPromo, String generoDePromo) throws TipoException {
+	public boolean isValido() {
+		validar();
+		return errors.isEmpty();
+	}
+
+	public void validar() {
+		errors = new HashMap<String, String>();
 		for (Atraccion atr : miPromo) {
 			if (!atr.getGenero().equals(generoDePromo)) {
-				throw new TipoException("La atraccion: " + atr.getNombre() + " no coincide con el genero de la promocion");
+				errors.put("Distinto genero", atr.getNombre());
 			}
 		}
-		return miPromo;
 	}
 
 	private double setDuracion() {

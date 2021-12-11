@@ -1,4 +1,4 @@
-package controller.atracciones;
+package controller.productos;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +16,7 @@ import persistence.dao.UsuarioDAO;
 import services.ComprarService;
 
 @WebServlet("/comprar.do")
-public class ComprarAtraccionesServlet extends HttpServlet {
+public class ComprarProductoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 502342851488788609L;
 	private ComprarService cs;
@@ -38,7 +38,7 @@ public class ComprarAtraccionesServlet extends HttpServlet {
 		Usuario user = DAOFactory.getUsuarioDAO().findbyID(usuarioId);
 
 		req.getSession().setAttribute("user", user);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/atracciones.do");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/productos.do");
 		dispatcher.forward(req, resp);
 
 	}
