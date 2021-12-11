@@ -120,25 +120,15 @@ a{
 	padding: 4px;
 }
 
-
 /*----------------------MODAL-----------------------*/
 .fade{
-	background-color: rgba(82, 121, 111, 0.294);
+	background-color: rgba(48, 39, 39, 0.39);
 }
 
 .modal-content{
-	background-color:#abc4b0ff;
+	background-color:#cad2c5ff;
 }
 
-.modal-header{
-	font-family: 'Corinthia', cursive;
-
-}
-
-.modal-body{
-	font-family: 'Corinthia', cursive;
-
-}
 
 
 /*------------ITINERARIO-------------------*/
