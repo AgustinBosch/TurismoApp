@@ -7,10 +7,6 @@
   --verde4: #2f3e46ff;
 }
 
-body{
-/* 	padding-bottom: 100px; */
-}
-
 
 .navbar {
   background-color: var(--verde2);
@@ -18,7 +14,7 @@ body{
 }
 
 body {
-  background-color: var(--gris);
+	background: var(--gris);
 }
 
 footer {
@@ -105,3 +101,31 @@ a{
 	color: var(--verde4);
 	padding: 4px;
 }
+
+
+/*----------------------MODAL-----------------------*/
+.fade{
+	background-color: rgba(82, 121, 111, 0.294);
+}
+
+.modal-content{
+	background-color:#abc4b0ff;
+}
+
+.modal-header{
+	font-family: 'Corinthia', cursive;
+
+}
+
+.modal-body{
+	font-family: 'Corinthia', cursive;
+
+}
+
+
+/*------------ITINERARIO-------------------*/
+.itinerario-font{
+	font-family: 'Corinthia';
+
+}
+
