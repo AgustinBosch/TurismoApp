@@ -49,6 +49,9 @@
 
 			</c:forEach>
 		</div>
+		
+		
+		
 	</main>
 
 	<jsp:include page="partials/footer.jsp"></jsp:include>

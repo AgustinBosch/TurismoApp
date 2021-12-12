@@ -47,33 +47,35 @@
 		</div>
 	</nav>
 
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">
-						Usuario:
-						<c:out value="${user.getName().toUpperCase()}"></c:out>
-					</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<h5>
-						Tipo Preferido:
-						<c:out value="${user.getTipoPref()}"></c:out>
-					</h5>
-					<h5>
-						Oro Disponible:
-						<c:out value="${user.getOro()}"></c:out>
-					</h5>
-					<h5>
-						Tiempo Disponible:
-						<c:out value="${user.getTiempoDisponible()}"></c:out>
-					</h5>
-				</div>
+<!-- 	Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">
+							Usuario:
+							<c:out value="${user.getNombre().toUpperCase()}"></c:out>
+						</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<h5>
+							Tipo Preferido:
+							<c:out value="${user.getTipoPref()}"></c:out>
+						</h5>
+						<h5>
+							Oro Disponible:
+							<c:out value="${user.getOro()}"></c:out>
+						</h5>
+						<h5>
+							Tiempo Disponible:
+							<c:out value="${user.getTiempoDisponible()}"></c:out>
+						</h5>
+					</div>
 
+				</div>
 			</div>
 		</div>
-	</div>
 </header>
