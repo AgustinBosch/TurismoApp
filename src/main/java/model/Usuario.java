@@ -11,15 +11,15 @@ import utils.Crypt;
 public class Usuario {
 	
 	private int id;
-	private String name, pass, TipoPref;
+	private String nombre, pass, TipoPref;
 	private double oro, tiempoDisponible;
 	private Itinerario itinerario;
 	private Boolean admin;
 	private Map<String, String> errors;
 
-	public Usuario(int id, String name, String pass, String TipoPref, double oro, double tiempoDisponible, Itinerario itinerario, Boolean admin) {
+	public Usuario(int id, String nombre, String pass, String TipoPref, double oro, double tiempoDisponible, Itinerario itinerario, Boolean admin) {
 		this.id = id;
-		this.name = name;
+		this.nombre = nombre;
 		this.pass = pass;
 		this.TipoPref = TipoPref;
 		this.oro = oro;
@@ -36,9 +36,16 @@ public class Usuario {
 		validar();
 		return errors.isEmpty();
 	}
+	
+	public Map<String, String> getErrors(){
+		return this.errors;
+	}
 
 	public void validar() {
 		errors = new HashMap<String, String>();
+		
+		if(this.nombre.length() <= 2)
+			errors.put("nombre", "Nombre no valido");
 
 		if (this.oro <= 0) 
 			errors.put("costo", "Debe ser positivo");
@@ -50,11 +57,11 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "(" + name + ", " + oro + ", " + tiempoDisponible + ", " + TipoPref + ")";
+		return "(" + nombre + ", " + oro + ", " + tiempoDisponible + ", " + TipoPref + ")";
 	}
 
-	public String getName() {
-		return this.name;
+	public String getNombre() {
+		return this.nombre;
 	}
 
 	public double getOro() {
@@ -118,7 +125,7 @@ public class Usuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name);
+		return Objects.hash(nombre);
 	}
 
 	@Override
@@ -130,7 +137,7 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(name, other.name);
+		return Objects.equals(nombre, other.nombre);
 	}
 
 	

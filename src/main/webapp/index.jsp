@@ -16,7 +16,7 @@
 				<c:if test="${user !=null}">
 					<h2 class="text-center">
 						Hola
-						<c:out value="${user.getName()}"></c:out>
+						<c:out value="${user.getNombre()}"></c:out>
 					</h2>
 				</c:if>
 

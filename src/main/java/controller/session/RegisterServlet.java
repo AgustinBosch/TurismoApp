@@ -1,6 +1,7 @@
 package controller.session;
 
 import java.io.IOException;
+import java.util.Map;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -32,22 +33,15 @@ public class RegisterServlet extends HttpServlet {
 		String tiempo = req.getParameter("tiemporegister");
 		String admin = req.getParameter("adminregister");
 
-		if (usuarioService.existeNombre(nombre)) {
-			req.setAttribute("flashreg", "Nombre no disponible");
+		Usuario userregistro = usuarioService.registrarUsuario(nombre, pass, tipo, oro, tiempo, admin);
+		if (userregistro.isValido()) {
+			Usuario user = usuarioService.login(nombre, pass);	
+			req.getSession().setAttribute("user", user);
+			resp.sendRedirect("index.jsp");
+		} else {
+			req.setAttribute("userinvalido", userregistro);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
 			dispatcher.forward(req, resp);
-			
-		} else {
-			Usuario userregistro = usuarioService.registrarUsuario(nombre, pass, tipo, oro, tiempo, admin);
-			if (!userregistro.isNull()) {
-				Usuario user = usuarioService.login(nombre, pass);
-				req.getSession().setAttribute("user", user);
-				resp.sendRedirect("index.jsp");
-			} else {
-				req.setAttribute("flashreg", "Usuario invalido");
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-				dispatcher.forward(req, resp);
-			}
 		}
 	}
 

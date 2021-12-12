@@ -7,7 +7,7 @@
 			</h2>
 
 			<c:choose>
-				<c:when test="${flash == null && flashreg != null}">
+				<c:when test="${flash == null && userinvalido != null}">
 					<c:set var="acordion1" value="" />
 					<c:set var="acordion2" value="show" />
 				</c:when>
@@ -56,11 +56,11 @@
 					<form action="register" method="post">
 						<div class="row">
 							<div class="form-outline mb-2">
-								<c:if test="${flashreg != null}">
+								<c:if test="${userinvalido != null}">
 									<div class="alert alert-danger">
-										<p>
-											<c:out value="${flashreg}" />
-										</p>
+										<c:forEach items="${userinvalido.getErrors().values()}" var="error">
+												<c:out value="${error}" />
+										</c:forEach>
 									</div>
 								</c:if>
 								<label class="form-label" for="nombreregister"> Nombre: </label>

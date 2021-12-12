@@ -31,7 +31,7 @@ public class TierraMedia {
 
 	private void venderATodos() {
 		for (Usuario p : this.misUsuarios) {
-			System.out.println("Hola " + p.getName());
+			System.out.println("Hola " + p.getNombre());
 			this.venderItinerario(p);
 		}
 	}
@@ -71,7 +71,7 @@ public class TierraMedia {
 				}
 			}
 		}
-		System.out.println("Gracias " + usuario.getName() + " por visitar La Tierra Media\n");
+		System.out.println("Gracias " + usuario.getNombre() + " por visitar La Tierra Media\n");
 	}
 
 	/*

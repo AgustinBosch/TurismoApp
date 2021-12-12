@@ -83,7 +83,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setString(1, u.getPass());
 			st.setBoolean(2, u.getAdmin());
-			st.setString(3, u.getName());
+			st.setString(3, u.getNombre());
 			st.setDouble(4, u.getOro());
 			st.setDouble(5, u.getTiempoDisponible());
 			st.setString(6, u.getTipoPref());
@@ -99,14 +99,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int update(Usuario u) {
 		try {
-			String sql = "UPDATE usuarios SET nombre = ?, oro = ?, tiempo_disponible = ?, tipo_preferido  = ? WHERE id = ?";
+			String sql = "UPDATE usuarios SET hash = ?, admin = ?, nombre = ?, oro = ?, tiempo_disponible = ?, tipo_preferido  = ? WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement st = conn.prepareStatement(sql);
-			st.setString(1, u.getName());
-			st.setDouble(2, u.getOro());
-			st.setDouble(3, u.getTiempoDisponible());
-			st.setString(4, u.getTipoPref());
-			st.setInt(5, u.getId());
+			st.setString(1, u.getPass());
+			st.setBoolean(2, u.getAdmin());
+			st.setString(3, u.getNombre());
+			st.setDouble(4, u.getOro());
+			st.setDouble(5, u.getTiempoDisponible());
+			st.setString(6, u.getTipoPref());
+			st.setInt(7, u.getId());
 			int resultado = st.executeUpdate();
 			return resultado;
 		} catch (SQLException e) {
@@ -117,9 +119,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int delete(Usuario u) {
 		try {
-			String sql = "UPDATE atracciones SET borrado = 1 WHERE id = ?";
+			String sql = "UPDATE usuarios SET borrado = 1 WHERE id = ?";
 			Connection conn = ConnectionProvider.getConnection();
-
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, u.getId());
 			int rs = st.executeUpdate();

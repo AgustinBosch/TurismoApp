@@ -81,7 +81,7 @@
 				<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 					<div class="accordion-body">
 
-						<a href="/TurismoApp/crearUsuario .do"><button class="card-link btn btn-primary mb-3">+ Nuevo usuario</button></a>
+						<a href="/TurismoApp/crearUsuario.do"><button class="card-link btn btn-primary mb-3">+ Nuevo usuario</button></a>
 						<table class="table table-striped table-hover">
 							<tr>
 								<th>id</th>
@@ -95,7 +95,7 @@
 							<c:forEach items="${usuarios}" var="user">
 								<tr>
 									<td><c:out value="${user.getId()}"></c:out></td>
-									<td><c:out value="${user.getName()}"></c:out></td>
+									<td><c:out value="${user.getNombre()}"></c:out></td>
 									<td><c:out value="${user.getTipoPref()}"></c:out></td>
 									<td><c:out value="${user.getOro()}"></c:out></td>
 									<td><c:out value="${user.getTiempoDisponible()}"></c:out></td>

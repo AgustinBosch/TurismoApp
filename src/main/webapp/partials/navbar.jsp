@@ -28,7 +28,7 @@
 				<c:if test="${user != null}">
 					<div class="info-usuario fs-5 ">
 						<i class="bi bi-piggy-bank-fill"> <c:out value="${user.getOro()}"></c:out></i> <i class="bi bi-clock-fill"> <c:out value="${user.getTiempoDisponible()}"></c:out></i> <i class="bi bi-person-fill" >
-							<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><c:out value="${user.getName()}"></c:out></button>
+							<button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><c:out value="${user.getNombre()}"></c:out></button>
 						</i> <a href="/TurismoApp/logout"><i id="boton-logout" class="bi bi-arrow-right-square-fill"></i></a>
 					</div>
 				</c:if>
@@ -37,7 +37,7 @@
   						<div class="modal-dialog">
    							 <div class="modal-content">
       								<div class="modal-header">
-       									 <h4 class="modal-title" id="exampleModalLabel">Usuario: "<c:out value="${user.getName()}"></c:out>"</h4>
+       									 <h4 class="modal-title" id="exampleModalLabel">Usuario: "<c:out value="${user.getNombre()}"></c:out>"</h4>
         								
       								</div>
       						<div class="modal-body">
