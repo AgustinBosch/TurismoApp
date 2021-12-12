@@ -8,9 +8,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import services.AdministrarService;
 import services.AtraccionService;
-import services.PromoService;
+import services.PromocionService;
 import services.UsuarioService;
 
 
@@ -20,14 +19,14 @@ public class AdministrarServlet extends HttpServlet {
 	private static final long serialVersionUID = -4007572705340183648L;
 	AtraccionService atraccionService;
 	UsuarioService usuariosService;
-	PromoService promoService;
-	
+	PromocionService promoService;
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		atraccionService = new AtraccionService();
 		usuariosService = new UsuarioService();
-		promoService = new PromoService();
+		promoService = new PromocionService();
 		
 	}
 	@Override

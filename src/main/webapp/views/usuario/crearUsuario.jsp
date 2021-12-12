@@ -11,7 +11,7 @@
 
 		<c:if test="${usuario != null && !usuario.isValido()}">
 			<div class="alert alert-danger">
-				<c:forEach items="${userinvalido.getErrors().values()}" var="error">
+				<c:forEach items="${usuario.getErrors().values()}" var="error">
 					<c:out value="${error}" />
 				</c:forEach>
 			</div>

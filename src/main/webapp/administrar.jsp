@@ -55,6 +55,7 @@
 								<th>id</th>
 								<th>Nombre</th>
 								<th>Genero</th>
+								<th>Atracciones</th>
 								<th>Oro</th>
 								<th>Tiempo</th>
 								<th>Opciones</th>
@@ -64,6 +65,7 @@
 									<td><c:out value="${promo.getId()}"></c:out></td>
 									<td><c:out value="${promo.getNombre()}"></c:out></td>
 									<td><c:out value="${promo.getGenero()}"></c:out></td>
+									<td><c:out value="${promo.getMisAtraccionesString()}"></c:out></td>
 									<td><c:out value="${promo.getCosto()}"></c:out></td>
 									<td><c:out value="${promo.getDuracion()}"></c:out></td>
 									<td><a href="/TurismoApp/editarPromo.do?id=${promo.getId()}"><i class="bi bi-pencil-square"></i></a> <a href="/TurismoApp/borrarPromo.do?id=${promo.getId()}"><i class="bi bi-trash-fill"></i></a></td>

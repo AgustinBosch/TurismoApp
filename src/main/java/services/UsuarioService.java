@@ -33,6 +33,7 @@ public class UsuarioService {
 	private Usuario toUsuario(String id, String nombre, String password, String tipo, String oro, String tiempo,
 			String admin) {
 
+		
 		int idint = ParseNumeros.parInt(id);
 		double oroD = ParseNumeros.parDouble(oro);
 		double tiempoD = ParseNumeros.parDouble(tiempo);

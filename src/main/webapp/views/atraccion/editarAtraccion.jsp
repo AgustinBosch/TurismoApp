@@ -9,10 +9,11 @@
 	<jsp:include page="/partials/navbar.jsp"></jsp:include>
 	<main class="container-fluid p-4">
 
-
 		<c:if test="${atraccion != null && !atraccion.isValido()}">
 			<div class="alert alert-danger">
-				<p>Campos invalidos</p>
+				<c:forEach items="${atraccion.getErrors().values()}" var="error">
+					<c:out value="${error}" />
+				</c:forEach>
 			</div>
 		</c:if>
 

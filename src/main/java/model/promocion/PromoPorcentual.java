@@ -17,8 +17,8 @@ public class PromoPorcentual extends Promo {
 	@Override
 	public void validar() {
 		super.validar();
-		if(porcentajeDescuento <= 0) {
-			this.errors.put("porcentaje Descuento", "Debe ser positivo");
+		if(porcentajeDescuento < 0) {
+			this.errors.put("extra", "Descuento ser positivo");
 		}
 		
 	}

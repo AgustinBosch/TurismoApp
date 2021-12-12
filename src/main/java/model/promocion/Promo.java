@@ -17,7 +17,6 @@ public abstract class Promo implements Sugerible {
 	private String descripcion;
 	protected Map<String, String> errors;
 
-
 	public Promo(int id, ArrayList<Atraccion> miPromo, String generoDePromo, String descripcion) {
 		this.miPromo = miPromo;
 		this.duracionPromedio = this.setDuracion();
@@ -25,18 +24,25 @@ public abstract class Promo implements Sugerible {
 		this.id = id;
 		this.descripcion = descripcion;
 	}
-	
 
 	public boolean isValido() {
 		validar();
 		return errors.isEmpty();
 	}
 
+	public Map<String, String> getErrors() {
+		return this.errors;
+	}
+
 	public void validar() {
 		errors = new HashMap<String, String>();
+		if (this.miPromo.isEmpty()) {
+			errors.put("atracciones", "No atracciones seleccionadas");
+		}
+
 		for (Atraccion atr : miPromo) {
 			if (!atr.getGenero().equals(generoDePromo)) {
-				errors.put("Distinto genero", atr.getNombre());
+				errors.put(atr.getNombre(), "Genero distinto");
 			}
 		}
 	}
@@ -57,13 +63,22 @@ public abstract class Promo implements Sugerible {
 	public ArrayList<Atraccion> getMisAtracciones() {
 		return this.miPromo;
 	}
+	
+	public String getMisAtraccionesString() {
+		String texto = "";
+		for (Atraccion atraccion : miPromo) {
+			texto += atraccion.getNombre() + "-";
+		}
+		return texto.substring(0, texto.length() - 1);
+	}
 
 	@Override
 	public String getGenero() {
 		return this.generoDePromo;
 	}
+
 	public abstract String getTipoPromo();
-	
+
 	public abstract double getExtra();
 
 	@Override
@@ -91,11 +106,10 @@ public abstract class Promo implements Sugerible {
 			atraccion.ocuparLugar();
 	}
 
-
 	public int getId() {
 		return this.id;
 	}
-	
+
 	@Override
 	public String getNombre() {
 		return "Pack " + this.generoDePromo;
@@ -120,7 +134,6 @@ public abstract class Promo implements Sugerible {
 
 		return resultado;
 	}
-
 
 	public String getDescripcion() {
 		return descripcion;

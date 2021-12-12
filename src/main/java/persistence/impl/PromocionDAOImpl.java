@@ -16,14 +16,13 @@ import persistence.commons.DAOFactory;
 import persistence.commons.MissingDataException;
 import persistence.dao.AtraccionDAO;
 import persistence.dao.PromocionDAO;
+import utils.ParseNumeros;
 
 public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
 	public Promo findbyID(Integer id) {
 		try {
-			AtraccionDAO ad = DAOFactory.getAtraccionDAO();
-			Map<Integer, Atraccion> mapa = ad.armarMapaAtraccion();
 			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion_id) AS 'atracciones' "
 					+ "FROM promociones "
 					+ "JOIN atracciones_promociones ON promociones.promo_id = atracciones_promociones.promo_id "
@@ -32,7 +31,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, id);
 			ResultSet rs = st.executeQuery();
-			return toPromo(rs, mapa);
+			return toPromo(rs);
 
 		} catch (SQLException e) {
 			throw new MissingDataException(e);
@@ -41,8 +40,6 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
 	public List<Promo> findAll() {
-		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
-		Map<Integer, Atraccion> mapa = ad.armarMapaAtraccion();
 		try {
 			String sql = "SELECT promociones.promo_id, promociones.tipo_promo, promociones.descripcion, promociones.tipo_atraccion,promociones.extra, group_concat(atraccion_id) AS 'atracciones' "
 					+ "FROM promociones "
@@ -55,7 +52,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 			ArrayList<Promo> promociones = new ArrayList<Promo>();
 
 			while (rs.next()) {
-				promociones.add(toPromo(rs, mapa));
+				promociones.add(toPromo(rs));
 			}
 			return promociones;
 
@@ -64,14 +61,21 @@ public class PromocionDAOImpl implements PromocionDAO {
 		}
 	}
 
-	private Promo toPromo(ResultSet rs, Map<Integer, Atraccion> mapa) throws SQLException {
+	public ArrayList<Atraccion> listaAtracciones(String[] ids) {
+		ArrayList<Atraccion> listaAtracciones = new ArrayList<Atraccion>();
+		AtraccionDAO ad = DAOFactory.getAtraccionDAO();
+		for (String id : ids) {
+			int idint = ParseNumeros.parInt(id);
+			listaAtracciones.add(ad.findbyID(idint));
+		}
+		return listaAtracciones;
+	}
+
+	private Promo toPromo(ResultSet rs) throws SQLException {
 		Promo p = NullPromo.build();
 
-		ArrayList<Atraccion> atraccionesDePromo = new ArrayList<Atraccion>();
 		String[] listaids = rs.getString("atracciones").split(",");
-		for (String id : listaids) {
-			atraccionesDePromo.add(mapa.get(Integer.parseInt(id)));
-		}
+		ArrayList<Atraccion> atraccionesDePromo = listaAtracciones(listaids);
 
 		if (rs.getString("tipo_promo").equals("Absoluta")) {
 			p = new PromoAbsoluta(rs.getInt("promo_id"), atraccionesDePromo, rs.getString("tipo_atraccion"),
@@ -109,13 +113,13 @@ public class PromocionDAOImpl implements PromocionDAO {
 	public int insert(Promo p) {
 		try {
 			int ultimoId = ultimoId() + 1;
-			String sqlpromo = "INSERT INTO promociones (tipo_promo, tipo_atraccion, extra) VALUES( ?, ?, ?)";
+			String sqlpromo = "INSERT INTO promociones (tipo_promo, tipo_atraccion, extra, descripcion) VALUES( ?, ?, ?, ?)";
 			Connection conn = ConnectionProvider.getConnection();
-
 			PreparedStatement st = conn.prepareStatement(sqlpromo);
 			st.setString(1, p.getTipoPromo());
 			st.setString(2, p.getGenero());
 			st.setDouble(3, p.getExtra());
+			st.setString(4, p.getDescripcion());
 			int resultado = st.executeUpdate();
 
 			String sqlatraccion;
@@ -137,7 +141,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	private int ultimoId() {
 		try {
-			String sql = "SELECT seq FROM sqlite_sequence WHERE name = promociones";
+			String sql = "SELECT seq FROM sqlite_sequence WHERE name = 'promociones'";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement st = conn.prepareStatement(sql);
@@ -155,12 +159,27 @@ public class PromocionDAOImpl implements PromocionDAO {
 		return 0;
 	}
 
+	private int borrarAtracciones(Promo p) {
+		try {
+			String sql = "DELETE FROM atracciones_promociones WHERE promo_id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, p.getId());
+			int rs = st.executeUpdate();
+			
+			return rs;
+		} catch (SQLException e) {
+			throw new MissingDataException(e);
+		}
+
+	}
+
 	@Override
 	public int delete(Promo p) {
 		try {
-			String sql = "UPDATE atracciones SET borrado = 1 WHERE id = ?";
+			String sql = "UPDATE promociones SET borrado = 1 WHERE promo_id = ?";
 			Connection conn = ConnectionProvider.getConnection();
-
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, p.getId());
 			int rs = st.executeUpdate();

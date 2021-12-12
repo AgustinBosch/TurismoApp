@@ -9,17 +9,16 @@
 	<jsp:include page="/partials/navbar.jsp"></jsp:include>
 	<main class="container-fluid p-4">
 
-		<c:if test="${atraccion != null && !atraccion.isValido()}">
+		<c:if test="${promocion != null && !promocion.isValido()}">
 			<div class="alert alert-danger">
-				<c:forEach items="${atraccion.getErrors().values()}" var="error">
+				<c:forEach items="${promocion.getErrors().values()}" var="error">
 					<c:out value="${error}" />
 				</c:forEach>
 			</div>
 		</c:if>
 
-
-		<form action="/TurismoApp/crearAtraccion.do" method="post">
-			<jsp:include page="/views/atraccion/formulario.jsp"></jsp:include>
+		<form action="/TurismoApp/crearPromo.do" method="post">
+			<jsp:include page="/views/promocion/formulario.jsp"></jsp:include>
 		</form>
 	</main>
 

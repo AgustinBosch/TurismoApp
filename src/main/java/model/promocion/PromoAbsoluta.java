@@ -23,7 +23,7 @@ public class PromoAbsoluta extends Promo {
 	public void validar() {
 		super.validar();
 		if(nuevoCosto <= 0) {
-			this.errors.put("Nuevo Costo", "Debe ser positivo");
+			this.errors.put("extra", "costo debe ser positivo");
 		}
 		
 	}

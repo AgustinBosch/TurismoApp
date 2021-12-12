@@ -16,14 +16,12 @@ public class AtraccionService {
 	private Atraccion toAtraccion(String id, String nombre, String oro, String genero, String tiempo, String cupo,
 			String descripcion) {
 
-		Atraccion a = NullAtraccion.build();
-
 		int idint = ParseNumeros.parInt(id);
 		double oroD = ParseNumeros.parDouble(oro);
 		double tiempoD = ParseNumeros.parDouble(tiempo);
 		int cupoI = ParseNumeros.parInt(cupo);
 
-		a = new Atraccion(idint, nombre, oroD, genero, tiempoD, cupoI, descripcion);
+		Atraccion a = new Atraccion(idint, nombre, oroD, genero, tiempoD, cupoI, descripcion);
 
 		return a;
 
@@ -32,7 +30,9 @@ public class AtraccionService {
 	public Atraccion crearAtraccion(String nombre, String oro, String genero, String tiempo, String cupo,
 			String descripcion) {
 
-		Atraccion a = toAtraccion("0", nombre, oro, genero, tiempo, cupo, descripcion);
+		Atraccion a = NullAtraccion.build();
+
+		a = toAtraccion("0", nombre, oro, genero, tiempo, cupo, descripcion);
 
 		if (a.isValido()) {
 			DAOFactory.getAtraccionDAO().insert(a);
@@ -41,8 +41,9 @@ public class AtraccionService {
 		return a;
 	}
 
-	public void borrar(Integer id) {
-		Atraccion a = new Atraccion(id, null, 0, null, 0, 0, null);
+	public void borrar(String id) {
+		int idint = ParseNumeros.parInt(id);
+		Atraccion a = new Atraccion(idint, null, 0, null, 0, 0, null);
 		DAOFactory.getAtraccionDAO().delete(a);
 	}
 

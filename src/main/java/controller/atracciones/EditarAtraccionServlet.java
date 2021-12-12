@@ -25,14 +25,11 @@ public class EditarAtraccionServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		String id = req.getParameter("id");
 		Atraccion a = atraccionService.buscarId(id);
-		
 		req.setAttribute("atraccion", a);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/atraccion/editarAtraccion.jsp");
 		dispatcher.forward(req, resp);
-
 	}
 	
 	@Override
