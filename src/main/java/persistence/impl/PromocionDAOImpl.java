@@ -156,18 +156,50 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
 	public int update(Promo p) {
-		return 0;
+		try {
+			
+			borrarAtracciones(p);
+			
+			String sql = "UPDATE promociones "
+					+ "SET tipo_promo = ?, tipo_atraccion = ?, extra = ?, descripcion = ?"
+					+ "WHERE promo_id = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			
+			st.setString(1, p.getTipoPromo());
+			st.setString(2, p.getGenero());
+			st.setDouble(3, p.getExtra());
+			st.setString(4, p.getDescripcion());			
+			st.setInt(5, p.getId());
+			
+			
+			int resultado = st.executeUpdate();
+
+			String sqlatraccion;
+			PreparedStatement stAtraccion;
+			for (Atraccion a : p.getMisAtracciones()) {
+				sqlatraccion = "INSERT INTO atracciones_promociones (promo_id, atraccion_id) VALUES ( ?, ?)";
+				stAtraccion = conn.prepareStatement(sqlatraccion);
+				stAtraccion.setInt(1, p.getId());
+				stAtraccion.setInt(2, a.getId());
+				resultado += stAtraccion.executeUpdate();
+			}
+
+			return resultado;
+		} catch (SQLException e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	private int borrarAtracciones(Promo p) {
 		try {
 			String sql = "DELETE FROM atracciones_promociones WHERE promo_id = ?";
 			Connection conn = ConnectionProvider.getConnection();
-			
+
 			PreparedStatement st = conn.prepareStatement(sql);
 			st.setInt(1, p.getId());
 			int rs = st.executeUpdate();
-			
+
 			return rs;
 		} catch (SQLException e) {
 			throw new MissingDataException(e);

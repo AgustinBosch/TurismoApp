@@ -17,7 +17,6 @@
 			</div>
 		</c:if>
 
-
 		<form action="/TurismoApp/editarPromo.do" method="post">
 			<input type="hidden" name="id" value="${promocion.getId()}">
 			<jsp:include page="/views/promocion/formulario.jsp"></jsp:include>
