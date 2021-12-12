@@ -82,16 +82,21 @@ main{
 	border-radius: 5px;
 	padding: 0 10px;
 	box-shadow: 0 2px 9px black;
+	transition: 0.3s;
+}
+
+.info-usuario:hover{
+	background-color: var(--verde1);
+	transition: 0.3s;
+	cursor: pointer;
 }
 
 .info-usuario > *{
   padding: 3px;
+  font-style: normal;
+  color: var(--verde3);
 }
 
-.info-usuario > i{
-	font-style: normal;
-  	color: var(--verde3);
-}
 
 .card {
 	width: 18rem;
