@@ -22,18 +22,18 @@
 
 <div class="form-check mb-3">
 	<label class="form-check-label" for="adminusuario"> Admin</label>
-	<input class="form-check-input" type="checkbox" value="true" name="adminusuario" id="adminusuario">
+	<input class="form-check-input" type="checkbox" value="true" name="adminusuario" id="adminusuario"  ${usuario.getAdmin() ? "checked" : ""}>
 </div>
 
 <div class="mb-3">
 	<label for="orousuario" class="form-label">Oro</label>
-	<input required value="${usuario.getOro()}" min="1" type="number" class="form-control" id="orousuario" name="orousuario" placeholder="Oro">
+	<input required value="${usuario.getOro()}" min="1" step="0.1" type="number" class="form-control" id="orousuario" name="orousuario" placeholder="Oro">
 </div>
 
 
 <div class="mb-3">
 	<label for="tiempousuario" class="form-label">Tiempo</label>
-	<input required value="${usuario.getTiempoDisponible()}" min="1" type="number" class="form-control" id="tiempousuario" name="tiempousuario" placeholder="Tiempo">
+	<input required value="${usuario.getTiempoDisponible()}" min="1" step="0.1" type="number" class="form-control" id="tiempousuario" name="tiempousuario" placeholder="Tiempo">
 </div>
 
 

@@ -13,7 +13,7 @@
 				<div class="col-sm-6 col-md-4 col-lg-3">
 					<div class="card m-4">
 						<!--<img src="..." class="card-img-top" alt="..."> -->
-						<div class="card-body">
+						<div class="card-body card-descripcion text-center">
 							<h5 class="card-title">
 								<c:out value="${sug.getNombre()}"></c:out>
 							</h5>

@@ -20,7 +20,7 @@
 
 <div class="mb-3">
 	<label for="extrapromo" class="form-label">Precio de promo Absoluta - Descuento Porcentual (50 = 50%) - MAX 100</label>
-	<input required type="number" step="any" class="form-control" id="extrapromo" value="${promocion.getExtra()}" name="extrapromo" placeholder="Extra" min="0">
+	<input required type="number" step="0.1" class="form-control" id="extrapromo" value="${promocion.getExtra()}" name="extrapromo" placeholder="Extra" min="0">
 </div>
 
 <div class="mb-3">
