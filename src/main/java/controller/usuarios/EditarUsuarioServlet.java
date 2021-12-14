@@ -47,6 +47,9 @@ public class EditarUsuarioServlet extends HttpServlet {
 		Usuario u = usuarioService.actualizar(id, nombre, pass, genero, oro, tiempo, admin);
 
 		if (u.isValido()) {
+			if(u.getId() ==((Usuario) req.getSession().getAttribute("user")).getId()) {
+				req.getSession().setAttribute("user", u);
+			}
 			resp.sendRedirect("/TurismoApp/administrar.do");
 		} else {
 			req.setAttribute("usuario", u);

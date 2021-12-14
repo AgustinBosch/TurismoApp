@@ -19,7 +19,7 @@ header{
 }
 
 body {
-	background: var(--gris);
+  background: linear-gradient(to bottom, var(--gris), var(--verde0));
 }
 
 footer {
