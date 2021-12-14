@@ -21,6 +21,9 @@ public class PromoPorcentual extends Promo {
 		if (porcentajeDescuento < 0) {
 			this.errors.put("extra", "Descuento ser positivo");
 		}
+		if (porcentajeDescuento > 100) {
+			this.errors.put("extra", "Descuento ser menor a 100");
+		}
 
 	}
 

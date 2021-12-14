@@ -12,12 +12,10 @@ public class NullPromo extends Promo {
 
 	public static Promo build() {
 		Promo p = null;
-		try {
-			ArrayList<Atraccion> a = new ArrayList<Atraccion>();
-			p = new NullPromo(a);
-		} catch (TipoException te) {
-			EscritorExceptions.escribirExceptions("SalidaExceptions/" + "Exceptions.txt", te);
-		}
+
+		ArrayList<Atraccion> a = new ArrayList<Atraccion>();
+		p = new NullPromo(a);
+
 		return p;
 	}
 
@@ -25,7 +23,7 @@ public class NullPromo extends Promo {
 		return true;
 	}
 
-	public NullPromo(ArrayList<Atraccion> a) throws TipoException {
+	public NullPromo(ArrayList<Atraccion> a) {
 		super(0, a, "", "");
 	}
 

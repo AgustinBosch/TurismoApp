@@ -82,7 +82,6 @@
 						<c:out value="${user.getTiempoDisponible()}"></c:out>
 					</h5>
 				</div>
-
 			</div>
 		</div>
 	</div>

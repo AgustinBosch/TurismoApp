@@ -17,25 +17,29 @@
 					<div class="accordion-body">
 
 						<a href="/TurismoApp/crearAtraccion.do"><button class="card-link btn btn-primary mb-3">+ Nueva atraccion</button></a>
-						<table class="table table-striped table-hover">
-							<tr>
-								<th>id</th>
-								<th>Nombre</th>
-								<th>Genero</th>
-								<th>Oro</th>
-								<th>Tiempo</th>
-								<th>Opciones</th>
-							</tr>
-							<c:forEach items="${atracciones}" var="atr">
+						<table class="datatable table table-striped table-hover">
+							<thead>
 								<tr>
-									<td><c:out value="${atr.getId()}"></c:out></td>
-									<td><c:out value="${atr.getNombre()}"></c:out></td>
-									<td><c:out value="${atr.getGenero()}"></c:out></td>
-									<td><c:out value="${atr.getCosto()}"></c:out></td>
-									<td><c:out value="${atr.getDuracion()}"></c:out></td>
-									<td><a href="/TurismoApp/editarAtraccion.do?id=${atr.getId()}"><i class="bi bi-pencil-square"></i></a> <a href="/TurismoApp/borrarAtraccion.do?id=${atr.getId()}"><i class="bi bi-trash-fill"></i></a></td>
+									<th>id</th>
+									<th>Nombre</th>
+									<th>Genero</th>
+									<th>Oro</th>
+									<th>Tiempo</th>
+									<th>Opciones</th>
 								</tr>
-							</c:forEach>
+							</thead>
+							<tbody>
+								<c:forEach items="${atracciones}" var="atr">
+									<tr>
+										<td><c:out value="${atr.getId()}"></c:out></td>
+										<td><c:out value="${atr.getNombre()}"></c:out></td>
+										<td><c:out value="${atr.getGenero()}"></c:out></td>
+										<td><c:out value="${atr.getCosto()}"></c:out></td>
+										<td><c:out value="${atr.getDuracion()}"></c:out></td>
+										<td><a href="/TurismoApp/editarAtraccion.do?id=${atr.getId()}"><i class="bi bi-pencil-square"></i></a> <a href="/TurismoApp/borrarAtraccion.do?id=${atr.getId()}"><i class="bi bi-trash-fill"></i></a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
 						</table>
 
 
@@ -50,29 +54,32 @@
 					<div class="accordion-body">
 
 						<a href="/TurismoApp/crearPromo.do"><button class="card-link btn btn-primary mb-3">+ Nueva promo</button></a>
-						<table class="table table-striped table-hover">
-							<tr>
-								<th>id</th>
-								<th>Nombre</th>
-								<th>Genero</th>
-								<th>Atracciones</th>
-								<th>Oro</th>
-								<th>Tiempo</th>
-								<th>Opciones</th>
-							</tr>
-							<c:forEach items="${promociones}" var="promo">
+						<table class="datatable table table-striped table-hover">
+							<thead>
 								<tr>
-									<td><c:out value="${promo.getId()}"></c:out></td>
-									<td><c:out value="${promo.getNombre()}"></c:out></td>
-									<td><c:out value="${promo.getGenero()}"></c:out></td>
-									<td><c:out value="${promo.getMisAtraccionesString()}"></c:out></td>
-									<td><c:out value="${promo.getCosto()}"></c:out></td>
-									<td><c:out value="${promo.getDuracion()}"></c:out></td>
-									<td><a href="/TurismoApp/editarPromo.do?id=${promo.getId()}"><i class="bi bi-pencil-square"></i></a> <a href="/TurismoApp/borrarPromo.do?id=${promo.getId()}"><i class="bi bi-trash-fill"></i></a></td>
+									<th>id</th>
+									<th>Nombre</th>
+									<th>Genero</th>
+									<th>Atracciones</th>
+									<th>Oro</th>
+									<th>Tiempo</th>
+									<th>Opciones</th>
 								</tr>
-							</c:forEach>
+							</thead>
+							<tbody>
+								<c:forEach items="${promociones}" var="promo">
+									<tr>
+										<td><c:out value="${promo.getId()}"></c:out></td>
+										<td><c:out value="${promo.getNombre()}"></c:out></td>
+										<td><c:out value="${promo.getGenero()}"></c:out></td>
+										<td><c:out value="${promo.getMisAtraccionesString()}"></c:out></td>
+										<td><c:out value="${promo.getCosto()}"></c:out></td>
+										<td><c:out value="${promo.getDuracion()}"></c:out></td>
+										<td><a href="/TurismoApp/editarPromo.do?id=${promo.getId()}"><i class="bi bi-pencil-square"></i></a> <a href="/TurismoApp/borrarPromo.do?id=${promo.getId()}"><i class="bi bi-trash-fill"></i></a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
 						</table>
-						
 					</div>
 				</div>
 			</div>
@@ -84,28 +91,32 @@
 					<div class="accordion-body">
 
 						<a href="/TurismoApp/crearUsuario.do"><button class="card-link btn btn-primary mb-3">+ Nuevo usuario</button></a>
-						<table class="table table-striped table-hover">
-							<tr>
-								<th>id</th>
-								<th>Nombre</th>
-								<th>Genero</th>
-								<th>Oro</th>
-								<th>Tiempo</th>
-								<th>Admin</th>
-								<th>Opciones</th>
-							</tr>
-							<c:forEach items="${usuarios}" var="user">
+						<table class="datatable table table-striped table-hover">
+							<thead>
 								<tr>
-									<td><c:out value="${user.getId()}"></c:out></td>
-									<td><c:out value="${user.getNombre()}"></c:out></td>
-									<td><c:out value="${user.getTipoPref()}"></c:out></td>
-									<td><c:out value="${user.getOro()}"></c:out></td>
-									<td><c:out value="${user.getTiempoDisponible()}"></c:out></td>
-									<td><c:out value="${user.getAdmin()}"></c:out></td>
-
-									<td><a href="/TurismoApp/editarUsuario.do?id=${user.getId()}"><i class="bi bi-pencil-square"></i></a><a href="/TurismoApp/borrarUsuario.do?id=${user.getId()}"><i class="bi bi-trash-fill"></i></a></td>
+									<th>id</th>
+									<th>Nombre</th>
+									<th>Genero</th>
+									<th>Oro</th>
+									<th>Tiempo</th>
+									<th>Admin</th>
+									<th>Opciones</th>
 								</tr>
-							</c:forEach>
+							</thead>
+							<tbody>
+								<c:forEach items="${usuarios}" var="user">
+									<tr>
+										<td><c:out value="${user.getId()}"></c:out></td>
+										<td><c:out value="${user.getNombre()}"></c:out></td>
+										<td><c:out value="${user.getTipoPref()}"></c:out></td>
+										<td><c:out value="${user.getOro()}"></c:out></td>
+										<td><c:out value="${user.getTiempoDisponible()}"></c:out></td>
+										<td><c:out value="${user.getAdmin()}"></c:out></td>
+
+										<td><a href="/TurismoApp/editarUsuario.do?id=${user.getId()}"><i class="bi bi-pencil-square"></i></a><a href="/TurismoApp/borrarUsuario.do?id=${user.getId()}"><i class="bi bi-trash-fill"></i></a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
 						</table>
 
 					</div>
