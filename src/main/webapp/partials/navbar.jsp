@@ -4,6 +4,7 @@
 	<nav class="navbar fixed-top navbar-expand-sm navbar-light">
 		<div class="container-fluid">
 			<i class="navbar-brand bi bi-gem" href="login.html"></i>
+			
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
