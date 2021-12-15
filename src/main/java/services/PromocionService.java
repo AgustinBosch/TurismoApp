@@ -10,7 +10,6 @@ import model.promocion.PromoAbsoluta;
 import model.promocion.PromoAxB;
 import model.promocion.PromoPorcentual;
 import persistence.commons.DAOFactory;
-import persistence.dao.PromocionDAO;
 import utils.ParseNumeros;
 
 public class PromocionService {

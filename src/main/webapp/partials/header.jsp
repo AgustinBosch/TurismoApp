@@ -2,14 +2,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="shortcut icon"	href="https://cdn-icons-png.flaticon.com/512/2373/2373927.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -17,7 +9,7 @@
 	crossorigin="anonymous" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" />
-<link rel="stylesheet" href="/TurismoApp/assets/css/color.css" />
+<link rel="stylesheet" href="/TurismoApp/assets/css/estilos.css" />
 
 <script defer
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

@@ -21,8 +21,7 @@ header{
 
 body {
   background: linear-gradient(to bottom, var(--gris), var(--verde0));
-font-family: 'MedievalSharp', cursive;
- 
+
 }
 
 footer {
@@ -53,6 +52,7 @@ main{
     background-color: var(--verde3);
     border-color: black;
 }
+
 .btn-primary:hover {
     color: #fff;
     background-color: var(--verde4);
@@ -159,11 +159,7 @@ a{
 	text-decoration:underline black;
 }
 
-.dato{
-	background-color: var(--gris);
-	border-radius:20px;
-	padding:3px;
-}
+
 /*------------ITINERARIO-------------------*/
 .itinerario-font{
 	font-family: 'Corinthia';
@@ -176,22 +172,14 @@ a{
 	margin-top:20px;
 }
 
-
-
-
-.nav-link{
-	border:1px solid rgba(33, 60, 63, 0.705);
-	border-radius:15px;
-	background-color: rgba(202, 210, 197, 0.801);
-}
-
-.nav-link:hover{
-	border-radius:15px;
-	background-color: var(--verde1);
+.tabla-itinerarios{
+	padding: 5px;
+	white-space: nowrap;
+	background-color: var(--gris);
 }
 
 
-.compra{
-	list-style:none;
-	
+table.tabla-itinerarios td, th{
+	padding: 0 10px;
 }
+

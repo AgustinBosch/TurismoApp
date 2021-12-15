@@ -49,7 +49,7 @@
 				<div class="modal-header">
 					<h5 class="modal-title titulo-m" id="ModalLabel">
 						Usuario:</h5>
-						<h5 class="modal-title nombre-usuario"><c:out value="${user.getNombre().toUpperCase()}"></c:out>
+						<h5 class="modal-title nombre-usuario">  <c:out value="${user.getNombre().toUpperCase()}"></c:out>
 					</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>

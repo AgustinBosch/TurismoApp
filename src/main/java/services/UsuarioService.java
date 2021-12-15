@@ -2,12 +2,10 @@ package services;
 
 import java.util.List;
 
-import model.Atraccion;
 import model.Itinerario;
 import model.Usuario;
 import model.nullobjects.NullUsuario;
 import persistence.commons.DAOFactory;
-import persistence.dao.UsuarioDAO;
 import utils.ParseNumeros;
 
 public class UsuarioService {

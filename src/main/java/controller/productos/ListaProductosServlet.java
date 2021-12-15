@@ -9,10 +9,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Atraccion;
 import model.Sugerible;
 import model.Usuario;
-import services.AtraccionService;
 import services.SugeribleService;
 
 @WebServlet("/productos.do")

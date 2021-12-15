@@ -59,7 +59,6 @@
 									src="https://cloud.educaplay.com/recursos/107/3439481/imagen_1_1513357774.gif">
 							</div>
 							<div class="col gif"></div>
-
 						</div>
 					</c:if>
 				</div>

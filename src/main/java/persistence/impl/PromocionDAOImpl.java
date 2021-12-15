@@ -6,11 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import model.Atraccion;
 import model.nullobjects.NullPromo;
-import model.promocion.*;
+import model.promocion.Promo;
+import model.promocion.PromoAbsoluta;
+import model.promocion.PromoAxB;
+import model.promocion.PromoPorcentual;
 import persistence.commons.ConnectionProvider;
 import persistence.commons.DAOFactory;
 import persistence.commons.MissingDataException;
