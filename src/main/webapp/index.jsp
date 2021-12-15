@@ -11,7 +11,8 @@
 
 
 
-		<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+		<div id="carouselExampleSlidesOnly" class="carousel slide"
+			data-bs-ride="carousel">
 			<div class="row">
 				<div class="col">
 
@@ -25,7 +26,8 @@
 								</h2>
 							</c:when>
 							<c:otherwise>
-								<h3 class="text-center">Inicia Sesion para comprar y disfrutar de las mejores atracciones.</h3>
+								<h3 class="text-center">Inicia Sesion para comprar y
+									disfrutar de las mejores atracciones.</h3>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -39,7 +41,9 @@
 						<div class="carousel-item">
 							<c:choose>
 								<c:when test="${user !=null}">
-									<h3 class="text-center">Hace Click en "Productos" en la parte superior izquierda para comprar tus atracciones favoritas.</h3>
+									<h3 class="text-center">Hace Click en "Productos" en la
+										parte superior izquierda para comprar tus atracciones
+										favoritas.</h3>
 								</c:when>
 								<c:otherwise>
 									<h3 class="text-center">Las mejores ofertas en Productos.</h3>
@@ -47,7 +51,19 @@
 							</c:choose>
 						</div>
 					</div>
+					<c:if test="${user == null }">
+						<div class="row">
+							<div class="col gif"></div>
+							<div class="col gif">
+								<img alt=""
+									src="https://cloud.educaplay.com/recursos/107/3439481/imagen_1_1513357774.gif">
+							</div>
+							<div class="col gif"></div>
+
+						</div>
+					</c:if>
 				</div>
+
 
 
 				<c:if test="${user == null}">
