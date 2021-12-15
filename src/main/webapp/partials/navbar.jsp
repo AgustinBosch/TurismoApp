@@ -46,24 +46,24 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="ModalLabel">
-						Usuario:
-						<c:out value="${user.getNombre().toUpperCase()}"></c:out>
+					<h5 class="modal-title titulo-m" id="ModalLabel">
+						Usuario:</h5>
+						<h5 class="modal-title nombre-usuario"><c:out value="${user.getNombre().toUpperCase()}"></c:out>
 					</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<h5>
+					<h5 class="detalles">
 						Tipo Preferido:
-						<c:out value="${user.getTipoPref()}"></c:out>
+						<span class="dato"><c:out value="${user.getTipoPref()}"></c:out></span>
 					</h5>
-					<h5>
+					<h5 class="detalles">
 						Oro Disponible:
-						<c:out value="${user.getOro()}"></c:out>
+						<span class="dato"><c:out value="${user.getOro()}"></c:out></span>
 					</h5>
-					<h5>
+					<h5 class="detalles">
 						Tiempo Disponible:
-						<c:out value="${user.getTiempoDisponible()}"></c:out>
+						<span class="dato"><c:out value="${user.getTiempoDisponible()}"></c:out></span>
 					</h5>
 				</div>
 			</div>
