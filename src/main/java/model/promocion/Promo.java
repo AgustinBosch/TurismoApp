@@ -42,7 +42,7 @@ public abstract class Promo implements Sugerible {
 
 		for (Atraccion atr : miPromo) {
 			if (!atr.getGenero().equals(generoDePromo)) {
-				errors.put(atr.getNombre(), "Genero distinto");
+				errors.put(atr.getNombre(), atr.getNombre() + " genero distinto");
 			}
 		}
 	}

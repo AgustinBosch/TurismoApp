@@ -25,6 +25,7 @@
 									<th>Genero</th>
 									<th>Oro</th>
 									<th>Tiempo</th>
+									<th>Cupo</th>
 									<th>Opciones</th>
 								</tr>
 							</thead>
@@ -36,6 +37,7 @@
 										<td><c:out value="${atr.getGenero()}"></c:out></td>
 										<td><c:out value="${atr.getCosto()}"></c:out></td>
 										<td><c:out value="${atr.getDuracion()}"></c:out></td>
+										<td><c:out value="${atr.getCupo()}"></c:out></td>
 										<td><a href="/TurismoApp/editarAtraccion.do?id=${atr.getId()}"><i class="bi bi-pencil-square"></i></a> <a href="/TurismoApp/borrarAtraccion.do?id=${atr.getId()}"><i class="bi bi-trash-fill"></i></a></td>
 									</tr>
 								</c:forEach>
